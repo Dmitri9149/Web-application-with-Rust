@@ -1,1 +1,5 @@
 /target
+.env
+bash_scripts
+test.http
+tests/

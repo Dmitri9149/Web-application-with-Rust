@@ -20,8 +20,24 @@ mod errors;
 // entry point to start server 
 
 #[actix_rt::main]
-async fn main() {
-  println!("Hello, world!!!!!!!!!!!!");
+async fn main() -> std::io::Result<()> {
+  // get some parameters from .env file 
+  // here the SERVER_PORT=localhost:3000
+  dotenv().ok();
+
+  // Construct App and configure routes
+  let app = move || {
+    App::new()
+      .congigure(home)
+  }
+  let port = env::var("SERVER_PORT").expect("SERVER_PORT is not set in .env file");
+
+  // Start server 
+
+  HttpServer::new(app).bind(port).unwrap().run().await
+
+
+
 }
 
 
