@@ -1,12 +1,17 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{get, web, App, HttpServer, HttpResponse};
+use crate::state::AppState;
+use std::time::{SystemTime, UNIX_EPOCH};
 
-#[get("/")]
-async fn index() -> impl Responder {
-    "Hello, World!"
+//#[get("/")]
+pub async fn index() -> HttpResponse {
+    HttpResponse::Ok().json("Hello World!")
 }
 
-#[get("/{name}")]
-async fn hello(name: web::Path<String>) -> impl Responder {
-    format!("Hello {}!", &name)
+//#[get("/{name}")]
+pub async fn hello(path: web::Path<String>) -> HttpResponse {
+    let name = path.into_inner();
+    let response = format!("Hello {}!", &name);
+    HttpResponse::Ok().json(&response)
+
 }
 

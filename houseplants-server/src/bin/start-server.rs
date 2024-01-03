@@ -4,7 +4,7 @@ use sqlx::postgres::PgPool;
 use std::env;
 use std::io;
 use routes::*;
-// use state::AppState;
+use state::AppState;
 
 
 #[path = "../server_modules/db_access/mod.rs"]
@@ -30,8 +30,14 @@ async fn main() -> std::io::Result<()> {
 
   // Construct App 
   let app = move || {
+    // server state as data 
+    let shared_data = web::Data::new(AppState {
+      server_is_running_message: "The server test page is running".to_string(),
+    });
     App::new()
-      .configure(home)
+      .app_data(shared_data.clone())
+      .configure(home_routes)
+      .configure(general_routes)
   };
   let port = env::var("SERVER_PORT").expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
 
