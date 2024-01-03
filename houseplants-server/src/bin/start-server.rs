@@ -28,15 +28,14 @@ async fn main() -> std::io::Result<()> {
   // Construct App and configure routes
   let app = move || {
     App::new()
-      .congigure(home)
-  }
-  let port = env::var("SERVER_PORT").expect("SERVER_PORT is not set in .env file");
+      .service(handlers::home::index)
+      .service(handlers::home::hello)
+  };
+  let port = env::var("SERVER_PORT").expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
 
   // Start server 
 
   HttpServer::new(app).bind(port).unwrap().run().await
-
-
 
 }
 
