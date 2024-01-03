@@ -8,7 +8,7 @@ use state::AppState;
 
 
 #[path = "../server_modules/db_access/mod.rs"]
-mod dbaccess;
+mod db_access;
 #[path = "../server_modules/handlers/mod.rs"]
 mod handlers;
 #[path = "../server_modules/models/mod.rs"]
@@ -43,7 +43,6 @@ async fn main() -> std::io::Result<()> {
 
   // Start server 
   HttpServer::new(app).bind(port).unwrap().run().await
-
 }
 
 

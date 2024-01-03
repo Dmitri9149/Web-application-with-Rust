@@ -868,6 +868,15 @@ version = "0.1.0"
 [[package]]
 name = "houseplants-client"
 version = "0.1.0"
+dependencies = [
+ "actix-rt",
+ "actix-web",
+ "chrono",
+ "dotenv",
+ "openssl",
+ "serde",
+ "sqlx",
+]
 
 [[package]]
 name = "houseplants-server"
