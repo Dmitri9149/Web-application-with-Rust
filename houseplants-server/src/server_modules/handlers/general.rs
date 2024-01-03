@@ -2,6 +2,7 @@ use crate::state::AppState;
 use actix_web::{web, HttpResponse};
 use std::time::{SystemTime, UNIX_EPOCH};
 
+// general route handler
 pub async fn general_page_handler(app_state: web::Data<AppState>) ->
   HttpResponse {
     let server_is_running = &app_state.server_is_running_message;
