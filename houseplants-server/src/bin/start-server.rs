@@ -25,7 +25,7 @@ async fn main() -> std::io::Result<()> {
   // here the SERVER_PORT=localhost:3000
   dotenv().ok();
 
-  // Construct App and configure routes
+  // Construct App 
   let app = move || {
     App::new()
       .service(handlers::home::index)
@@ -34,7 +34,6 @@ async fn main() -> std::io::Result<()> {
   let port = env::var("SERVER_PORT").expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
 
   // Start server 
-
   HttpServer::new(app).bind(port).unwrap().run().await
 
 }
