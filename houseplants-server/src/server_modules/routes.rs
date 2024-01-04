@@ -18,7 +18,8 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
 pub fn member_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
     web::scope("/members")
-      .route("/", web::get().to(get_members))
+    .route("/", web::post().to(post_new_member))
+    .route("/", web::get().to(get_members))
   );
 }
 
