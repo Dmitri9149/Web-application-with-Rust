@@ -1,5 +1,5 @@
 use crate::db_access::member::*;
-use crate::models::member::{NewMember};
+use crate::models::member::{NewMember, UpdateMember};
 use crate::state::AppState;
 use actix_web::{web, HttpResponse};
 
@@ -25,5 +25,17 @@ pub async fn delete_member(
   let (member_id,) = path.into_inner();
   let member = delete_member_db(&app_state.db, member_id) 
     .await;
+  HttpResponse::Ok().json(member)
+}
+
+pub async fn update_member_details(
+  app_state: web::Data<AppState>,
+  path: web::Path<(i32,)>,
+  update_member: web::Json<UpdateMember>
+) -> HttpResponse{
+  let (member_id,) = path.into_inner();
+  let member = update_member_details_db(&app_state.db, member_id, 
+    UpdateMember::from(update_member))
+      .await;
   HttpResponse::Ok().json(member)
 }

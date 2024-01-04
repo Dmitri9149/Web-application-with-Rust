@@ -22,7 +22,7 @@ pub fn member_routes(cfg: &mut web::ServiceConfig) {
     .route("/", web::post().to(post_new_member))
     .route("/", web::get().to(get_members))
     .route("/{member_id}", web::delete().to(delete_member))
-//    .route("/{member_id}", web::put().to(update_member_details))
+    .route("/{member_id}", web::put().to(update_member_details))
   );
 }
 
