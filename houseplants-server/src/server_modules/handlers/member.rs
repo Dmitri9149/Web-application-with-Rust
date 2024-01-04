@@ -18,3 +18,12 @@ pub async fn post_new_member(
     .await;
   HttpResponse::Ok().json(member)
 }
+
+pub async fn delete_member(
+  app_state: web::Data<AppState>,
+  path: web::Path<(i32,)>) -> HttpResponse {
+  let (member_id,) = path.into_inner();
+  let member = delete_member_db(&app_state.db, member_id) 
+    .await;
+  HttpResponse::Ok().json(member)
+}
