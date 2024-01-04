@@ -38,3 +38,19 @@ pub async fn post_new_plant_db(
             .unwrap();
     plant_row
 }
+
+pub async fn delete_plant_db(
+    pool: &PgPool,
+    member_id: i32, 
+    plant_id: i32, 
+) -> String { 
+    let plant_row = sqlx::query!(
+        "DELETE FROM plant WHERE member_id = $1 AND plant_id = $2",
+        member_id, 
+        plant_id,
+    )
+    .execute(pool)
+    .await
+    .unwrap();
+    format!("Deleted {:#?} record", plant_row)
+}
