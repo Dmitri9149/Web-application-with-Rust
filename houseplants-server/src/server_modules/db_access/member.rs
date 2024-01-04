@@ -39,3 +39,14 @@ pub async fn post_new_member_db(pool: &PgPool, new_member: NewMember) ->
       member_info: member_row.member_info,
       }
 }
+
+pub async fn delete_member_db(pool: &PgPool, member_id: i32) -> 
+  String {
+    let member = sqlx::query(&format!(
+      "DELETE FROM member WHERE member_id = {}", member_id
+    ))
+    .execute(pool)
+    .await
+    .unwrap();
+    format!("Deleted {:#?} record", member)
+}
