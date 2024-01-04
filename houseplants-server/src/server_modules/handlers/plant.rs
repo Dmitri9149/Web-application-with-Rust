@@ -22,3 +22,13 @@ pub async fn post_new_plant(
       .await;
   HttpResponse::Ok().json(plant)
 }
+
+pub async fn delete_plant(
+  app_state: web::Data<AppState>,
+  path: web::Path<(i32,i32)>,
+) -> HttpResponse {
+  let (member_id, plant_id) = path.into_inner();
+  let plant = delete_plant_db(&app_state.db, member_id, plant_id)
+    .await;
+  HttpResponse::Ok().json(plant)
+}
