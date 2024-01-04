@@ -44,7 +44,7 @@ pub async fn delete_plant_db(
     member_id: i32, 
     plant_id: i32, 
 ) -> String { 
-    let plant_row = sqlx::query!(
+    let plant = sqlx::query!(
         "DELETE FROM plant WHERE member_id = $1 AND plant_id = $2",
         member_id, 
         plant_id,
@@ -52,5 +52,5 @@ pub async fn delete_plant_db(
     .execute(pool)
     .await
     .unwrap();
-    format!("Deleted {:#?} record", plant_row)
+    format!("Deleted {:#?} record", plant)
 }
