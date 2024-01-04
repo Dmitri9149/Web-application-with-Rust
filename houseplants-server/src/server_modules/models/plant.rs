@@ -42,3 +42,28 @@ impl From<web::Json<NewPlant>> for NewPlant {
     }
   }
 }
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct UpdatePlant {
+  pub plant_name: Option<String>,
+  pub plant_description: Option<String>,
+  pub plant_care: Option<String>,
+  pub plant_care_difficulty: Option<String>,
+  pub plant_alternative_name: Option<String>,
+  pub plant_price: Option<i32>,
+  pub plant_extra_info: Option<String>,
+}
+
+impl From<web::Json<UpdatePlant>> for UpdatePlant {
+  fn from(update_plant: web::Json<UpdatePlant>) -> Self {
+    UpdatePlant {
+      plant_name: update_plant.plant_name.clone(),
+      plant_description: update_plant.plant_description.clone(),
+      plant_care: update_plant.plant_care.clone(),
+      plant_care_difficulty: update_plant.plant_care_difficulty.clone(),
+      plant_extra_info: update_plant.plant_extra_info.clone(),
+      plant_alternative_name: update_plant.plant_alternative_name.clone(),
+      plant_price: update_plant.plant_price,
+    }
+  }
+}
