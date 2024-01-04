@@ -10,6 +10,16 @@ pub async fn get_members(app_state: web::Data<AppState>) ->
     HttpResponse::Ok().json(members)
 }
 
+pub async fn get_member_details(
+  app_state: web::Data<AppState>, 
+  path: web::Path<(i32,)>
+) -> HttpResponse {
+  let (member_id,) = path.into_inner();
+  let member = get_member_details_db(&app_state.db, member_id)
+    .await;
+  HttpResponse::Ok().json(member)
+}
+
 pub async fn post_new_member(
   new_member: web::Json<NewMember>,
   app_state: web::Data<AppState>
