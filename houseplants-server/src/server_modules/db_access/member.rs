@@ -23,6 +23,26 @@ pub async fn get_members_db(pool: &PgPool) -> Vec<Member> {
       .collect()
 }
 
+pub async fn get_member_details_db(pool: &PgPool, member_id: i32) -> 
+  Member {
+
+    // Prepare SQL statement 
+    let member = sqlx::query!(
+      "SELECT member_id, member_name, member_info FROM member 
+       WHERE member_id = $1 
+       ORDER BY member_id DESC", member_id
+    )
+    .fetch_one(pool)
+    .await
+    .unwrap();
+  Member {
+    member_id: member.member_id,
+    member_name: member.member_name,
+    member_info: member.member_info
+  }
+}
+
+
 pub async fn post_new_member_db(pool: &PgPool, new_member: NewMember) -> 
   Member {
     let member_row = sqlx::query!(
