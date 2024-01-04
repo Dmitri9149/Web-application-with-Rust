@@ -17,6 +17,22 @@ pub async fn get_plants_for_member_db(
         .unwrap()
 }
 
+pub async fn get_plant_details_db(pool: &PgPool, member_id: i32, plant_id: i32
+) -> Plant {
+    // Prepare SQL statement
+    let plant = sqlx::query_as!(
+        Plant, 
+        "SELECT * FROM plant WHERE member_id = $1 AND plant_id = $2",
+        member_id, plant_id
+        )
+        .fetch_optional(pool)
+        .await
+        .unwrap()
+        .unwrap();
+
+    plant
+}
+
 // post new plant record by a member
 pub async fn post_new_plant_db(
     pool: &PgPool,
@@ -127,5 +143,4 @@ pub async fn update_plant_details_db (
         .await
         .unwrap();
     plant
-
 }
