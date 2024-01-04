@@ -22,3 +22,18 @@ impl From<web::Json<NewMember>> for NewMember {
     }
   }
 }
+
+#[derive(Deserialize, Debug, Clone)]
+pub struct UpdateMember {
+  pub member_name: Option<String>,
+  pub member_info: Option<String>
+}
+
+impl From<web::Json<UpdateMember>> for UpdateMember {
+  fn from(new_member: web::Json<UpdateMember>) -> Self {
+    UpdateMember {
+      member_name: new_member.member_name.clone(),
+      member_info: new_member.member_info.clone()
+    }
+  }
+}

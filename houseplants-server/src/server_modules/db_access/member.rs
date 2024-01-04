@@ -1,4 +1,4 @@
-use crate::models::member::{Member, NewMember};
+use crate::models::member::{Member, NewMember, UpdateMember};
 use sqlx::postgres::PgPool;
 use std::error::Error;
 
@@ -49,4 +49,51 @@ pub async fn delete_member_db(pool: &PgPool, member_id: i32) ->
     .await
     .unwrap();
     format!("Deleted {:#?} record", member)
+}
+
+pub async fn update_member_details_db (
+  pool: &PgPool,
+  member_id: i32,
+  change_member: UpdateMember,
+) -> Member {
+  // Retrieve current member from DB
+  let member = sqlx::query!(
+    "SELECT member_id, member_name, member_info 
+    FROM member 
+    WHERE member_id = $1", member_id
+  )
+  .fetch_one(pool)
+  .await
+  .unwrap();
+
+    let new_member = Member {
+      member_id: member.member_id, 
+      member_name: if let Some(name) = change_member.member_name {
+        name 
+      } else {
+        member.member_name
+      },
+      member_info: if let Some(info) = change_member.member_info {
+        info
+      } else {
+        member.member_info
+      }
+    };
+
+    // Prepare SQL update statement
+    let member_updated = sqlx::query!(
+      "UPDATE member 
+       SET member_name = $1, member_info = $2 
+       WHERE member_id = $3
+       RETURNING member_id, member_name, member_info",
+       new_member.member_name, 
+       new_member.member_info,  
+       new_member.member_id)
+       .fetch_one(pool)
+       .await;
+      Member {
+        member_id: new_member.member_id, 
+        member_name: new_member.member_name,
+        member_info: new_member.member_info
+      }
 }

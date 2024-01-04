@@ -15,6 +15,7 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
   cfg.route("general", web::get().to(general_page_handler));
 }
 
+// routes for handling members 
 pub fn member_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
     web::scope("/members")
@@ -24,6 +25,7 @@ pub fn member_routes(cfg: &mut web::ServiceConfig) {
   );
 }
 
+// routes for handling plants records
 pub fn plant_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
   web::scope("/plants")
