@@ -16,3 +16,25 @@ pub async fn get_plants_for_member_db(
         .await
         .unwrap()
 }
+
+// post new plant record by a member
+pub async fn post_new_plant_db(
+    pool: &PgPool,
+    new_plant: NewPlant,
+) -> Plant {
+    let plant_row= sqlx::query_as!(Plant,
+        "INSERT INTO plant (member_id, plant_name, 
+            plant_description, plant_alternative_name, plant_extra_info, plant_care, 
+            plant_care_difficulty, plant_price) 
+            values ($1,$2,$3,$4,$5,$6,$7,$8) 
+            RETURNING member_id, plant_id, plant_name, plant_description, 
+            plant_alternative_name, plant_extra_info, plant_care, 
+            plant_care_difficulty, plant_price, posted_time", 
+            new_plant.member_id, new_plant.plant_name, new_plant.plant_description,
+            new_plant.plant_alternative_name, new_plant.plant_extra_info, new_plant.plant_care, 
+            new_plant.plant_care_difficulty, new_plant.plant_price)
+            .fetch_one(pool)
+            .await
+            .unwrap();
+    plant_row
+}

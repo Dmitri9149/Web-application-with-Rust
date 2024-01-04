@@ -2,7 +2,6 @@ use crate::db_access::member::*;
 use crate::models::member::{NewMember};
 use crate::state::AppState;
 use actix_web::{web, HttpResponse};
-use std::error::Error;
 
 pub async fn get_members(app_state: web::Data<AppState>) -> 
   HttpResponse {

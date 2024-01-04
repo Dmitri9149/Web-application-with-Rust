@@ -26,7 +26,7 @@ pub fn member_routes(cfg: &mut web::ServiceConfig) {
 pub fn plant_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
   web::scope("/plants")
-//  .route("/", web::post().to(post_new_plant))
+  .route("/", web::post().to(post_new_plant))
   .route("/{member_id}", web::get().to(get_plants_for_member))
 //  .route("/{member_id}/{plant_id}", web::get().to(get_plant_details))
 //  .route("/{member_id}/{plant_id}", web::put().to(update_plant_details))
