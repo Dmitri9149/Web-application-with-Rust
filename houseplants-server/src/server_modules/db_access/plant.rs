@@ -7,15 +7,12 @@ pub async fn get_plants_for_member_db(
     pool: &PgPool,
     member_id: i32,
 ) -> Vec<Plant> {
-    // Prepare SQL statement
-    let plant_rows: Vec<Plant> = sqlx::query_as!(
+    sqlx::query_as!(
         Plant, 
-        "SELECT * FROM plant where member_id = $1",
+        "SELECT * FROM plant WHERE member_id = $1",
         member_id
-    )
-    .fetch_all(pool)
-    .await
-    .unwrap();
-    // Extract result
-    plant_rows
+        )
+        .fetch_all(pool)
+        .await
+        .unwrap()
 }
