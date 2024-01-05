@@ -1,6 +1,7 @@
 use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::{
-  show_register_form,show_signin_form, handle_register};
+  show_register_form,show_signin_form, handle_register, handle_signin};
+use crate::handlers::plant::{show_new_plant_form, new_plant_addition};
 use actix_files as fs;
 use actix_web::web;
 
