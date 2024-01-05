@@ -25,8 +25,8 @@ async fn main() -> std::io::Result<()> {
   let db_pool = PgPool::connect(&db_url).await.unwrap();
 
     // server state as data 
-    let shared_data = web::Data::new(AppState {
-      server_is_running_message: "The server test page is running".to_string(),
+    let shared_data = web::Data::new(state::AppState {
+      server_is_running_message: "The web client test page is running".to_string(),
       db: db_pool, 
     });
 
