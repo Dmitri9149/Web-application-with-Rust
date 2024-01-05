@@ -1,5 +1,6 @@
 use crate::handlers::{home::*, general::*};
-use crate::handlers::authorization::{show_register_form, show_signin_form};
+use crate::handlers::authorization::{show_register_form, 
+  show_signin_form, handle_register};
 use actix_web::web;
 
 // home page route
@@ -27,7 +28,7 @@ pub fn authorization(config: &mut web::ServiceConfig) {
   .service(web::resource("/").route(web::get().to(show_register_form)))
   .service(web::resource("/signinform").route(web::get().to(show_signin_form)))
 //  .service(web::resource("/signin").route(web::post().to(handle_signin)))
-//  .service(web::resource("/register").route(web::post().to(handle_register)))
+  .service(web::resource("/register").route(web::post().to(handle_register)))
   );
 }
 
