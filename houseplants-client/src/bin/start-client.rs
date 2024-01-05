@@ -26,7 +26,7 @@ async fn main() -> std::io::Result<()> {
 
     // server state as data 
     let shared_data = web::Data::new(state::AppState {
-      server_is_running_message: "The web client test page is running".to_string(),
+      web_client_is_running_message: "The web client test page is running".to_string(),
       db: db_pool, 
     });
 
