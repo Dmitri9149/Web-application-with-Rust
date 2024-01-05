@@ -19,5 +19,19 @@ pub async fn get_user_record_db(pool: &PgPool, username: String) ->
   } else {
     Err(CustomError::NotFound("Username not found".into()))
   }
+}
 
+pub async fn post_new_user(pool: &PgPool, new_user: User) -> 
+  Result<User, CustomError> {
+    let user = sqlx::query_as!(
+      User, 
+      "INSERT INTO web_user 
+      (username, member_id, user_password) VALUES ($1, $2, $3)
+      RETURNING username, member_id, user_password",
+      new_user.username, new_user.member_id, new_user.user_password
+    )
+    .fetch_one(pool)
+    .await?;
+
+    Ok(user)
 }
