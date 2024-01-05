@@ -1,18 +1,17 @@
-use actix_web::{web, App, HttpServer};
-use dotenv::dotenv;
-use sqlx::postgres::PgPool;
-use std::env;
-use std::io;
-use routes::*;
-use state::AppState;
-use tera::Tera;
-
 #[path = "../client_modules/mod.rs"]
 mod client_modules;
+use actix_web::{web, App, HttpServer};
+use actix_web::web::Data;
+use dotenv::dotenv;
+use client_modules::{db_access, errors, handlers, model, routes, state};
+use routes::{authorization_routes, plant_routes};
+use sqlx::postgres::PgPool;
+use std::env;
+
+use tera::Tera;
 
 // entry point to start server 
-
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
   // get some parameters from .env file 
   // here the SERVER_PORT=localhost:3000
