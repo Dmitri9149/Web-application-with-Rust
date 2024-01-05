@@ -12,7 +12,8 @@ pub async fn get_user_db(pool: &PgPool, username: String) ->
     username  
   )
   .fetch_optional(pool)
-  .await?;
+  .await
+  .unwrap();
 
   if let Some(user) = result {
     Ok(user)
@@ -31,7 +32,8 @@ pub async fn post_new_user_db(pool: &PgPool, new_user: User) ->
       new_user.username, new_user.member_id, new_user.user_password
     )
     .fetch_one(pool)
-    .await?;
+    .await
+    .unwrap();
 
     Ok(user)
 }
