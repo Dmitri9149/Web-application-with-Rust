@@ -1,4 +1,4 @@
-use crate::db_access::{get_user_record_db, post_new_user_db};
+use crate::db_access::{get_user_db, post_new_user_db};
 use crate::errors::CustomError;
 use crate::client_modules::state::AppState;
 use crate::model::{MemberRegisterForm, MemberResponse, User, MemberSigninForm};
@@ -44,7 +44,7 @@ pub async fn handle_register(
   let mut ctx = tera::Context::new();
   let s;
   let username = params.username.clone();
-  let user = get_user_record_db(&app_state.db, username.to_string()).await;
+  let user = get_user_db(&app_state.db, username.to_string()).await;
   let user_not_found: bool = user.is_err();
 
   // If user is not found in database, proceed to verification of passwords
@@ -114,7 +114,7 @@ pub async fn handle_register(
   let mut ctx = tera::Context::new();
   let s;
   let username = params.username.clone();
-  let user = get_user_record_db(&app_state.db, 
+  let user = get_user_db(&app_state.db, 
     username.to_string()).await;
   if let Ok(user) = user {
     let does_password_match = argon2::verify_encoded(
