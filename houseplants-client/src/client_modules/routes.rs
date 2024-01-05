@@ -32,6 +32,7 @@ pub fn authorization_routes(config: &mut web::ServiceConfig) {
   );
 }
 
+// create / delete / modify plants records from the client 
 pub fn plant_routes(config: &mut web::ServiceConfig) {
   config.service(
       web::scope("/plants")
