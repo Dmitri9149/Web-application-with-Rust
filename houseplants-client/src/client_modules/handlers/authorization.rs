@@ -1,4 +1,4 @@
-use crate::db_access::{get_user_record_db};
+use crate::db_access::{get_user_record_db, post_new_user_db};
 use crate::errors::CustomError;
 use crate::client_modules::state::AppState;
 use crate::model::{MemberRegisterForm, MemberResponse, User, MemberSigninForm};
