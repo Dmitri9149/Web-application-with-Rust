@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>Member registration</title>
+    <link rel="stylesheet" href="/static/member-styles.css">
+</head>
+
+<body>
+    <div class="header_a">
+    <h1>Welcome to House Plants</h1>
+    <p>Read and Write about Houseplants</p>
+    </div>
+
+    <div class="center">
+    <h2>Member registration</h2>
+    <form action=/register method=POST id="registerform">
+        <label for="userid">Enter username</label><br>
+        <input type="text" name="username" value="{{current_username}}" autocomplete="username" minlength="6"
+            maxlength="12" required><br>
+        <label for="password">Enter password</label><br>
+        <input type="password" name="password" value="{{current_password}}" autocomplete="new-password"
+            minlength="8" maxlength="12" required><br>
+        <label for="confirm">Confirm password</label><br>
+        <input type="password" name="confirmation" value="{{current_confirmation}}" autocomplete="new-password"
+            minlength="8" maxlength="12" required><br>
+        <label for="userid">Enter member name</label><br>
+        <input type="text" name="name" value="{{current_name}}" maxlength="12" required><br>
+        <label for="imageurl">Enter member image url</label><br>
+        <input type="text" name="imageurl" value="{{current_imageurl}}" maxlength="30"><br>
+        <label for="profile">Brief member profile</label><br>
+        <input type="text" name="profile" value="{{current_profile}}" maxlength="40"><br>
+        <label for="error">
+            <p style="color:red">{{error}}</p>
+        </label>
+        <br>
+        <button type=submit id="button1">Register</button>
+    </form>
+    <form action=/signinform method=GET>
+        <button type=submit id="button2">Sign in</button>
+    </form>
+    </div>
+</html>
