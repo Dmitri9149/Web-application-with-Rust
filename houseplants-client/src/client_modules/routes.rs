@@ -6,6 +6,8 @@ use actix_web::web;
 pub fn home_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
     web::scope("/home")
+    .service(fs::Files::new(
+      "/static", "./static").show_files_listing())
     .route("", web::get().to(index))
     .route("/{name}", web::get().to(hello))
   );
