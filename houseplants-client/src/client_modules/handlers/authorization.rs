@@ -90,7 +90,7 @@ pub async fn handle_register(
         member_id: Some(member_response.member_id),
         user_password: hash,
       };
-      let _member_created = post_new_user(&app_state.db, user).await?;
+      let _member_created = post_new_user_db(&app_state.db, user).await?;
     }
   } else {
       ctx.insert("error", "User Id already exists");
@@ -98,11 +98,10 @@ pub async fn handle_register(
       ctx.insert("current_password", "");
       ctx.insert("current_confirmation", "");
       ctx.insert("current_name", &params.name);
-      ctx.insert("current_imageurl", &params.imageurl);
-      ctx.insert("current_profile", &params.profile);
+      ctx.insert("current_info", &params.info);
       s = tmpl
           .render("register_form/register.html", &ctx)
-          .map_err(|_| HousePlantError::TeraError("Template error".to_string()))?;
+          .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
     };
     Ok(HttpResponse::Ok().content_type("text/html").body(s))
  }
