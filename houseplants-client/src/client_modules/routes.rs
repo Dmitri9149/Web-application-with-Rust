@@ -1,5 +1,5 @@
 use crate::handlers::{home::*, general::*};
-use crate::handlers::authorization::{show_register_form};
+use crate::handlers::authorization::{show_register_form, show_signin_form};
 use actix_web::web;
 
 // home page route
