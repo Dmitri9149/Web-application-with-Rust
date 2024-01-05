@@ -3,6 +3,7 @@ use crate::model::{NewPlant, NewPlantResponse,
   UpdatePlant, UpdatePlantResponse, NewPlantForm};
 use crate::state::AppState;
 use actix_web::{web, Error, HttpResponse, Result};
+use crate::errors::CustomError;
 use serde_json::json;
 
 pub async fn show_new_plant_form(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
