@@ -3,7 +3,7 @@ use crate::model::*;
 use sqlx::postgres::PgPool;
 
 //Query user record from DB 
-pub async fn get_user_record(pool: &PgPool, username: String) -> 
+pub async fn get_user_record_db(pool: &PgPool, username: String) -> 
   Result<User, CustomError> {
   // Prepare SQL statement
   let result = sqlx::query_as!(
