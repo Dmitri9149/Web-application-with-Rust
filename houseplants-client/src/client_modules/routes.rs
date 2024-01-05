@@ -20,7 +20,7 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
 }
 
 // user authorization routes 
-pub fn authorization(config: &mut web::ServiceConfig) {
+pub fn authorization_routes(config: &mut web::ServiceConfig) {
   config.service(
   web::scope("")
   .service(fs::Files::new(

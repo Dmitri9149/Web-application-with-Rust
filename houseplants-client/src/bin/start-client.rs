@@ -40,7 +40,7 @@ async fn main() -> std::io::Result<()> {
       .app_data(shared_data.clone())
       .configure(home_routes)
       .configure(general_routes)
-      .configure(authorization)
+      .configure(authorization_routes)
   };
  
   // Start server 
