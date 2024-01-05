@@ -36,6 +36,7 @@ Result<HttpResponse, Error> {
   Ok(HttpResponse::Ok().content_type("text.html").body(s))
 }
 
+// register a new member or make signing of already existed member
 pub async fn handle_register(
   tmpl: web::Data<tera::Tera>,
   app_state: web::Data<AppState>,
@@ -74,7 +75,7 @@ pub async fn handle_register(
                   .await?;
       let member_response: MemberResponse = serde_json::from_str(&std::str::from_utf8(&result)?)?;
       s = format!(
-        "Congratulations. You have been successfully registered as member of Houseplants and your member id is: {}. To start using HousePlant, please login with your credentials.", 
+        "Congratulations. You have been successfully registered as member of HousePlants and your member id is: {}. To start using HousePlant, please login with your credentials.", 
         member_response.member_id
       );
 
@@ -106,6 +107,7 @@ pub async fn handle_register(
     Ok(HttpResponse::Ok().content_type("text/html").body(s))
  }
 
+// handle signing of already existed member 
  pub async fn handle_signin(
   tmpl: web::Data<tera::Tera>,
   app_state: web::Data<AppState>,
