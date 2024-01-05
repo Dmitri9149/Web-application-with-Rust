@@ -46,6 +46,7 @@ async fn main() -> std::io::Result<()> {
       .configure(plant_routes)
   };
   let port = env::var("SERVER_PORT").expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
+  println!("Listening on: {}", &host_port);
 
   // Start server 
   HttpServer::new(app).bind(port).unwrap().run().await
