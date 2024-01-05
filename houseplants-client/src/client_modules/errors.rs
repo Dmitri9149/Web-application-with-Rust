@@ -2,6 +2,8 @@ use actix_web::{error, http::StatusCode, HttpResponse, Result};
 use serde::Serialize;
 use std::fmt;
 
+// define Custom Error for more precises errors 
+// (NotFound and TeraError) handling 
 #[derive(Debug, Serialize)]
 pub enum CustomError {
     NotFound(String),
