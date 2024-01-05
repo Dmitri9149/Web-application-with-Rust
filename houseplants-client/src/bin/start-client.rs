@@ -5,20 +5,10 @@ use std::env;
 use std::io;
 use routes::*;
 use state::AppState;
+use tera::Tera;
 
-
-#[path = "../client_modules/db_access.rs"]
-mod db_access;
-#[path = "../client_modules/handlers/mod.rs"]
-mod handlers;
-#[path = "../client_modules/model.rs"]
-mod models;
-#[path = "../client_modules/routes.rs"]
-mod routes;
-#[path = "../client_modules/state.rs"]
-mod state;
-#[path = "../client_modules/errors.rs"]
-mod errors;
+#[path = "../client_modules/mod.rs"]
+mod client_modules;
 
 // entry point to start server 
 
@@ -27,6 +17,8 @@ async fn main() -> std::io::Result<()> {
   // get some parameters from .env file 
   // here the SERVER_PORT=localhost:3000
   dotenv().ok();
+  let port = env::var("SERVER_PORT")
+    .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
   let db_url = env::var("DATABASE_URL")
     .expect("Is DATABASE_URL set in .env file? From what folder you start server (where in .env file)?" );
   let db_pool = PgPool::connect(&db_url).await.unwrap();
@@ -43,9 +35,9 @@ async fn main() -> std::io::Result<()> {
       .app_data(shared_data.clone())
       .configure(home_routes)
       .configure(general_routes)
+      .configure(authorization)
   };
-  let port = env::var("SERVER_PORT").expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
-
+ 
   // Start server 
   HttpServer::new(app).bind(port).unwrap().run().await
 }
