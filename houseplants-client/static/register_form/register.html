@@ -16,21 +16,19 @@
     <div class="form_a">
     <h2>Member registration</h2>
     <form action=/register method=POST id="registerform">
-        <label for="userid">Enter username</label><br>
+        <label for="username">Enter username</label><br>
         <input type="text" name="username" value="{{current_username}}" autocomplete="username" minlength="6"
             maxlength="12" required><br>
         <label for="password">Enter password</label><br>
         <input type="password" name="password" value="{{current_password}}" autocomplete="new-password"
             minlength="8" maxlength="12" required><br>
-        <label for="confirm">Confirm password</label><br>
+        <label for="confirmation">Confirm password</label><br>
         <input type="password" name="confirmation" value="{{current_confirmation}}" autocomplete="new-password"
             minlength="8" maxlength="12" required><br>
-        <label for="userid">Enter member name</label><br>
-        <input type="text" name="name" value="{{current_name}}" maxlength="12" required><br>
-        <label for="imageurl">Enter member image url</label><br>
-        <input type="text" name="imageurl" value="{{current_imageurl}}" maxlength="30"><br>
-        <label for="profile">Brief member profile</label><br>
-        <input type="text" name="profile" value="{{current_profile}}" maxlength="40"><br>
+        <label for="member name">Enter member name</label><br>
+        <input type="text" name="member name" value="{{current_name}}" maxlength="12" required><br>
+        <label for="member info">Brief member profile</label><br>
+        <input type="text" name="member info" value="{{current_info}}" maxlength="40"><br>
         <label for="error">
             <p style="color:red">{{error}}</p>
         </label>
