@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>New plant</title>
+    <link rel="stylesheet" href="/static/register_and_signin.css">
+</head>
+
+<body>
+    <div class="header_a">
+        <h1>Welcome to House Plants </h1>
+        <p> Read and Write about Houseplants </p>
+    </div>
+    <div class="form_a">
+        <h2>
+            Add a new plant
+        </h2>
+        <form action=/plants/add_new method=POST id="new_plant_form">
+          <label for="member name">Enter your member name</label><br>
+          <input type="text" name="member name" value="{{current_member_name}}" autocomplete="member_name" minlength="6"
+              maxlength="12" required><br>
+            <label for="plant name">Plant name</label><br>
+            <input type="text" name="plant name" value="{{current_plant_name}}" autocomplete="plant_name" minlength="6"
+                maxlength="25" required><br>
+            <label for="plant description">Plant description</label><br>
+            <input type="text" name="plant description" value="{{current_plant_description}}" autocomplete="description" minlength="6"
+                maxlength="25" required><br>
+            <label for="plant care">Plant care description</label><br>
+            <input type="text" name="plant care" value="{{current_plant_care}}" autocomplete="plant care" minlength="6"
+                maxlength="25" required><br>
+            <label for="plant alternative name">Plant other names</label><br>
+            <input type="text" name="plant alternative name" value="{{current_plant_another_name}}" autocomplete="other names of plant" minlength="6"
+                maxlength="25" required><br>                
+            <label for="plant care difficulty">Difficulty of the plant care </label><br>
+            <input type="text" name="plant care difficulty" value="{{current_plant_care_difficulty}}" autocomplete="difficulty of care" minlength="6"
+                maxlength="25" ><br>
+            <label for="plant price">Plant price</label><br>
+            <input type="number" name="plant price" value="{{current_plant_price}}" autocomplete="price" minlength="6"
+                maxlength="25" ><br>
+            <label for="plant extra info">Some extra info</label><br>
+            <input type="text" name="plant extra info" value="{{current_plant_extra_info}}" autocomplete="extra info" minlength="6"
+                maxlength="25" ><br>
+            <label for="error">
+                <p style="color:red">{{error}}</p>
+            </label>
+            <br>
+            <button type=submit id="button1">New Plant</button>
+        </form>
+    </div>
+</html>
