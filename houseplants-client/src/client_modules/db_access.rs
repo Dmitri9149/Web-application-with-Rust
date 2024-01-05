@@ -21,7 +21,7 @@ pub async fn get_user_record_db(pool: &PgPool, username: String) ->
   }
 }
 
-pub async fn post_new_user(pool: &PgPool, new_user: User) -> 
+pub async fn post_new_user_db(pool: &PgPool, new_user: User) -> 
   Result<User, CustomError> {
     let user = sqlx::query_as!(
       User, 
