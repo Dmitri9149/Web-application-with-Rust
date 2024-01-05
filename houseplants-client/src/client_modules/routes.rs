@@ -32,3 +32,21 @@ pub fn authorization_routes(config: &mut web::ServiceConfig) {
   );
 }
 
+pub fn plant_routes(config: &mut web::ServiceConfig) {
+  config.service(
+      web::scope("/plants")
+//          .service(
+//              web::resource("show/{member_id}/{plant_id}").route(web::get().to(handle_show_member_plant)))
+          .service(web::resource("new").route(web::get().to(show_new_plant_form)))
+//          .service(web::resource("add_new").route(web::post().to(handle_new_plant_addition)))
+//          .service(web::resource("new/{member_id}").route(web::post().to(handle_insert_plant)))
+//          .service(
+//              web::resource("{member_id}/{plant_id}").route(web::put().to(handle_update_plant)),
+//          )
+//          .service(
+//              web::resource("delete/{member_id}/{plant_id}")
+//                  .route(web::delete().to(handle_delete_plant)),
+//          ),
+  );
+}
+
