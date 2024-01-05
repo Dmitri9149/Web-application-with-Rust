@@ -1,6 +1,7 @@
 use crate::handlers::{home::*, general::*};
-use crate::handlers::authorization::{show_register_form, 
-  show_signin_form, handle_register};
+use crate::handlers::authorization::{
+  show_register_form,show_signin_form, handle_register};
+use actix_files as fs;
 use actix_web::web;
 
 // home page route
