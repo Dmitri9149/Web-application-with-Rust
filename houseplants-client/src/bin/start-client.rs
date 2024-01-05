@@ -20,7 +20,7 @@ async fn main() -> std::io::Result<()> {
   let port = env::var("SERVER_PORT")
     .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
   println!("Listening on: {}", &host_port);
-  
+
   let db_url = env::var("DATABASE_URL")
     .expect("Is DATABASE_URL set in .env file? From what folder you start server (where in .env file)?" );
   let db_pool = PgPool::connect(&db_url).await.unwrap();
@@ -33,7 +33,10 @@ async fn main() -> std::io::Result<()> {
 
   // Construct App 
   let app = move || {
+    // use tera templates 
+    let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/static/html_pages/**/*")).unwrap();
     App::new()
+      .app_data(Data::new(tera.clone()))
       .app_data(shared_data.clone())
       .configure(home_routes)
       .configure(general_routes)
