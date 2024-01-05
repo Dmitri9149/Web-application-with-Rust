@@ -1,5 +1,5 @@
 use crate::handlers::{home::*, general::*};
-use crate::handlers::user_authorization::{show_register_form};
+use crate::handlers::authorization::{show_register_form};
 use actix_web::web;
 
 // home page route
@@ -17,7 +17,7 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
 }
 
 // user authorization routes 
-pub fn app_config(config: &mut web::ServiceConfig) {
+pub fn authorization(config: &mut web::ServiceConfig) {
   config.service(
   web::scope("")
 //  .service(fs::Files::new(
