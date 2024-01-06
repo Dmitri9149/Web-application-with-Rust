@@ -4,7 +4,7 @@
 <head>
     <meta charset=utf-8>
     <title>Member registration</title>
-    <link rel="stylesheet" href="/static/register_and_signin_forms.css">
+    <link rel="stylesheet" href="/templates/register_and_signin_forms.css">
 </head>
 
 <body>
@@ -25,10 +25,10 @@
         <label for="confirmation">Confirm password</label><br>
         <input type="password" name="confirmation" value="{{current_confirmation}}" autocomplete="new-password"
             minlength="8" maxlength="12" required><br>
-        <label for="member name">Enter member name</label><br>
-        <input type="text" name="member name" value="{{current_name}}" maxlength="12" required><br>
-        <label for="member info">Brief member profile</label><br>
-        <input type="text" name="member info" value="{{current_info}}" maxlength="40"><br>
+        <label for="name">Member name</label><br>
+        <input type="text" name="name" value="{{current_name}}" maxlength="40" required><br>
+        <label for="info">Brief member profile</label><br>
+        <input type="text" name="info" value="{{current_info}}" maxlength="40"><br>
         <label for="error">
             <p style="color:red">{{error}}</p>
         </label>
