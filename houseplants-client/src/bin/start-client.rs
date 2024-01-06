@@ -34,8 +34,8 @@ async fn main() -> std::io::Result<()> {
   let app = move || {
 
     // use Tera templates 
-    let tera = match Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/static/**/*.html")) {
-//    let tera = match Tera::new("./static/**/*.html") {
+    let tera = match Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*.html")) {
+//    let tera = match Tera::new("./templates/**/*.html") {
       Ok(t) => t, 
       Err(e) => {
         println!("Parsing error(s): {}", e);

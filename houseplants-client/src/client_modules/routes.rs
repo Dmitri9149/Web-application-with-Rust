@@ -24,7 +24,7 @@ pub fn authorization_routes(config: &mut web::ServiceConfig) {
   config.service(
   web::scope("")
     .service(fs::Files::new(
-      "/static", "./static").show_files_listing())
+      "/templates", "./templates").show_files_listing())
     .service(web::resource("/").route(web::get().to(show_register_form)))
     .service(web::resource("/signinform").route(web::get().to(show_signin_form)))
     .service(web::resource("/signin").route(web::post().to(handle_signin)))
