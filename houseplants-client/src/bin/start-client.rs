@@ -33,7 +33,7 @@ async fn main() -> std::io::Result<()> {
   // Construct App 
   let app = move || {
     // use tera templates 
-    let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/static/**/*")).unwrap();
+    let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/static/**/*.html")).unwrap();
     App::new()
       .app_data(Data::new(tera.clone()))
       .app_data(shared_data.clone())
