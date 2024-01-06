@@ -63,4 +63,36 @@ pub async fn new_plant_addition(
   }
 }
 
+pub async fn handle_insert_plant(
+  _tmpl: web::Data<tera::Tera>,
+  _app_state: web::Data<AppState>,
+  path: web::Path<i32>,
+  params: web::Json<NewPlant>
+) -> Result<HttpResponse, Error> {
+  let member_id = path.into_inner();
+  let new_plant = json!({
+    "member_id": member_id,
+    "plant_name": &params.plant_name,
+    "plant_description": &params.plant_description,
+    "plant_care": &params.plant_care,
+    "plant_care_difficulty": &params.plant_care_difficulty,
+    "plant_alternative_name": &params.plant_alternative_name,
+    "plant_price": &params.plant_price,
+    "plant_extra_info": &params.plant_extra_info
+  });
+  println!("New plant {:?}", new_plant);
+  let awc_client = awc::Client::default();
+  let res = awc_client
+              .post("http://localhost:3000/plants/")
+              .send_json(&new_plant)
+              .await
+              .unwrap()
+              .body()
+              .await?;
+
+  println!("Finished call: {:?}", res);
+  let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+  Ok(HttpResponse::Ok().json(plant_response))
+}
+
 
