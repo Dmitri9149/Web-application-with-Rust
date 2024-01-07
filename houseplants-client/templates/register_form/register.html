@@ -15,7 +15,7 @@
 
     <div class="form_a">
     <h2>Member registration</h2>
-    <form action=/auth/register method=POST id="registerform">
+    <form action=/register method=POST id="registerform">
         <label for="username">Enter username</label><br>
         <input type="text" name="username" value="{{current_username}}" id="username" autocomplete="username" minlength="6"
             maxlength="12" required><br>
@@ -35,7 +35,7 @@
         <br>
         <button type=submit id="button1">Register</button>
     </form>
-    <form action=/auth/signinform method=GET>
+    <form action=/signinform method=GET>
         <button type=submit id="button2">Sign in</button>
     </form>
     </div>
