@@ -1,8 +1,7 @@
 use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::{
   show_register_form,show_signin_form, handle_register, handle_signin};
-use crate::handlers::plant::{show_new_plant_form, new_plant_addition,
-  show_new_plant_form_a};
+use crate::handlers::plant::{show_new_plant_form, new_plant_addition};
 use actix_files as fs;
 use actix_web::web;
 
@@ -21,11 +20,19 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
 }
 
 // user authorization routes 
+pub fn templates_routes(config: &mut web::ServiceConfig) {
+  config.service(
+  web::scope("")
+    .service(fs::Files::new(
+      "/templates", "./templates").show_files_listing()));
+}
+
+// user authorization routes 
 pub fn authorization_routes(config: &mut web::ServiceConfig) {
   config.service(
   web::scope("auth")
-    .service(fs::Files::new(
-      "/templates", "./templates").show_files_listing())
+/*    .service(fs::Files::new(
+      "/templates", "./templates").show_files_listing()) */
     .service(web::resource("/").route(web::get().to(show_register_form)))
     .service(web::resource("/signinform").route(web::get().to(show_signin_form)))
     .service(web::resource("/signin").route(web::post().to(handle_signin)))
