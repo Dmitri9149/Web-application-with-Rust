@@ -4,7 +4,8 @@ use actix_web::{web, App, HttpServer};
 use actix_web::web::Data;
 use dotenv::dotenv;
 use client_modules::{db_access, errors, handlers, model, routes, state};
-use routes::{authorization_routes, plant_routes, home_routes, general_routes};
+use routes::{authorization_routes, plant_routes, 
+  home_routes, general_routes, templates_routes};
 use sqlx::postgres::PgPool;
 use std::env;
 
@@ -34,7 +35,7 @@ async fn main() -> std::io::Result<()> {
   let app = move || {
 
     // use Tera templates  
-    let tera = match Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*.html")) {
+    let tera = match Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/**/*")) {
 //    let tera = match Tera::new("./templates/**/*.html") {
       Ok(t) => t, 
       Err(e) => {
@@ -49,6 +50,7 @@ async fn main() -> std::io::Result<()> {
       .configure(general_routes)
       .configure(authorization_routes)
       .configure(plant_routes)
+      .configure(templates_routes)
   };
  
   // Start server 
