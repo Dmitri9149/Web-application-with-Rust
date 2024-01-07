@@ -26,7 +26,7 @@
         <input type="password" name="confirmation" value="{{current_confirmation}}" id="confirmation" autocomplete="new-password"
             minlength="8" maxlength="12" required><br>
         <label for="name">Member name</label><br>
-        <input type="text" name="name" value="{{current_name}}" id="name" maxlength="40" required autocomplete="name"><br>
+        <input type="text" name="name" value="{{current_name}}" id="name" minlength="2" maxlength="10" required autocomplete="name"><br>
         <label for="info">Brief member info</label><br>
         <input type="text" name="info" value="{{current_info}}" id="info" maxlength="40" autocomplete="info"><br>
         <label for="error">
@@ -35,7 +35,7 @@
         <br>
         <button type=submit id="button1">Register</button>
     </form>
-    <form action=/signinform method=GET>
+    <form action=/ method=GET>
         <button type=submit id="button2">Sign in</button>
     </form>
     </div>
