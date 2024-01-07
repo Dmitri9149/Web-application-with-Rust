@@ -29,7 +29,7 @@ Result<HttpResponse, Error> {
   ctx.insert("current_name", "");
   ctx.insert("current_password", "");
   let s = tmpl
-            .render("signin_form/signin.html", &ctx)
+            .render("signin_form/signin_form.html", &ctx)
             .map_err(|_| CustomError::TeraError(
               "Template error".to_string()))?;
 
@@ -129,7 +129,7 @@ pub async fn handle_register(
       ctx.insert("current_name", &params.username);
       ctx.insert("current_password", &params.password);
       s = tmpl
-            .render("signin_form/signin.html", &ctx)
+            .render("signin_form/signin_form.html", &ctx)
             .map_err(|_| CustomError::TeraError(
               "Template error".to_string()))?;
     } else {
@@ -140,7 +140,7 @@ pub async fn handle_register(
         &"You have successfully logged in to HousePlants!".to_owned()
       );
       s = tmpl
-            .render("user.html", &ctx)
+            .render("user/user.html", &ctx)
             .map_err(|_| CustomError::TeraError(
               "Template error".to_string()))?;
     }
@@ -149,7 +149,7 @@ pub async fn handle_register(
     ctx.insert("current_name", &params.username);
     ctx.insert("current_password", &params.password);
     s = tmpl 
-          .render("signin_form/signin.html", &ctx)
+          .render("signin_form/signin_form.html", &ctx)
           .map_err(|_| CustomError::TeraError(
             "Template error".to_string()))?;
   };
