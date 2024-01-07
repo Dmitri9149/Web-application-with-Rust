@@ -94,23 +94,3 @@ pub async fn handle_insert_plant(
   let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
   Ok(HttpResponse::Ok().json(plant_response))
 }
-
-pub async fn show_new_plant_form_a(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
-  let mut ctx = tera::Context::new();
-/*  ctx.insert("error", "");
-  ctx.insert("current_member_name", "");
-  ctx.insert("current_plant_name", "");
-  ctx.insert("current_plant_description", "");
-  ctx.insert("current_plant_care", "");
-  ctx.insert("current_plant_alternative_name", "");
-  ctx.insert("current_plant_care_difficulty", "");
-  ctx.insert("current_plant_price", "");
-  ctx.insert("current_plant_extra_info", ""); */
-  let s = tmpl
-      .render("new_plant_form/new_plant.html", &ctx)
-      .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
-  Ok(HttpResponse::Ok().content_type("text/html").body(s))
-}
-
-
-
