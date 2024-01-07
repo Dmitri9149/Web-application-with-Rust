@@ -5,7 +5,7 @@ use actix_web::web::Data;
 use dotenv::dotenv;
 use client_modules::{db_access, errors, handlers, model, routes, state};
 use routes::{authorization_routes, plant_routes, 
-  home_routes, general_routes, templates_routes};
+  home_routes, general_routes};
 use sqlx::postgres::PgPool;
 use std::env;
 
@@ -50,7 +50,6 @@ async fn main() -> std::io::Result<()> {
       .configure(general_routes)
       .configure(authorization_routes)
       .configure(plant_routes)
-      .configure(templates_routes)
   };
  
   // Start server 
