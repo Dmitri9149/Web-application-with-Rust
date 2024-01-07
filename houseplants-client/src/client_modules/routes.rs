@@ -23,7 +23,7 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
 // user authorization routes 
 pub fn authorization_routes(config: &mut web::ServiceConfig) {
   config.service(
-  web::scope("authorization")
+  web::scope("auth")
     .service(fs::Files::new(
       "/templates", "./templates").show_files_listing())
     .service(web::resource("/").route(web::get().to(show_register_form)))
