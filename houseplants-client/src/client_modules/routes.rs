@@ -1,14 +1,15 @@
 use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::{
   show_register_form,show_signin_form, handle_register, handle_signin};
-use crate::handlers::plant::{show_new_plant_form, new_plant_addition};
+use crate::handlers::plant::{show_new_plant_form, new_plant_addition,
+  show_new_plant_form_a};
 use actix_files as fs;
 use actix_web::web;
 
 // home page route
 pub fn home_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
-    web::scope("/home")
+    web::scope("home")
       .route("", web::get().to(index))
       .route("/{name}", web::get().to(hello))
   );
@@ -22,7 +23,7 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
 // user authorization routes 
 pub fn authorization_routes(config: &mut web::ServiceConfig) {
   config.service(
-  web::scope("")
+  web::scope("authorization")
     .service(fs::Files::new(
       "/templates", "./templates").show_files_listing())
     .service(web::resource("/").route(web::get().to(show_register_form)))
@@ -32,14 +33,15 @@ pub fn authorization_routes(config: &mut web::ServiceConfig) {
   );
 }
 
+
 // create / delete / modify plants records from the client 
 pub fn plant_routes(config: &mut web::ServiceConfig) {
   config.service(
-      web::scope("/plants")
+    web::scope("plants")
 //          .service(
 //              web::resource("show/{member_id}/{plant_id}").route(web::get().to(handle_show_member_plant)))
-          .service(web::resource("new").route(web::get().to(show_new_plant_form)))
-          .service(web::resource("add_new").route(web::post().to(new_plant_addition)))
+      .service(web::resource("/").route(web::get().to(show_new_plant_form)))
+      .service(web::resource("add_new").route(web::post().to(new_plant_addition)))
 //          .service(web::resource("new/{member_id}").route(web::post().to(handle_insert_plant)))
 //          .service(
 //              web::resource("{member_id}/{plant_id}").route(web::put().to(handle_update_plant)),
@@ -50,4 +52,5 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
 //          ),
   );
 }
+
 

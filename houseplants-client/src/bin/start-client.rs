@@ -33,7 +33,7 @@ async fn main() -> std::io::Result<()> {
   // Construct App 
   let app = move || {
 
-    // use Tera templates 
+    // use Tera templates  
     let tera = match Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*.html")) {
 //    let tera = match Tera::new("./templates/**/*.html") {
       Ok(t) => t, 
