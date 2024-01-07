@@ -73,19 +73,19 @@
     </div>
     <div class="form_a">
     <h2>Member sign in</h2>
-    <form action=/signin method=POST>       
+    <form action=/auth/signin method=POST>       
         <label for="username">Enter username</label><br>            
         <input type="text" name="username" autocomplete="username" value="{{current_name}}" minlength="6"
-            maxlength="12" required><br>
+            maxlength="12" id="username" required><br>
         <label for="password">Enter password</label><br>        
         <input type="password" name="password" autocomplete="new-password" value="{{current_password}}"
-            minlength="8" maxlength="12" required><br>
+            minlength="8" maxlength="12" id="password" required><br>
         <label for="error">                                     
             <p style="color:red">{{error}}</p>
         </label><br>
         <button type=submit id="button1">Sign in</button>       
     </form>
-    <form action=/ method=GET>                                  
+    <form action=auth/ method=GET>                                  
         <button type=submit id="button1">Register</button>
     </form>
     </div>
