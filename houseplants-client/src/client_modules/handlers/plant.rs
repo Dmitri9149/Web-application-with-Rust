@@ -57,7 +57,7 @@ pub async fn new_plant_addition(
     Ok(HttpResponse::Ok().json(plant_response))
   } else {
     let s = tmpl
-    .render("new_plant_form.html", &ctx)
+    .render("new_plant_form/new_plant_form.html", &ctx)
     .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
     Ok(HttpResponse::Ok().content_type("text/html").body(s))
   }
