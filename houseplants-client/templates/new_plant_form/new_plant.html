@@ -4,7 +4,7 @@
 <head>
     <meta charset=utf-8>
     <title>New plant</title>
-    <link rel="stylesheet" href="/templates/register_and_signin_forms.css">
+    <link rel="stylesheet" href="/auth/templates/register_and_signin_forms.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
         <h2>
             Add a new plant
         </h2>
-        <form action=/add_new method=POST id="new_plant_form">
+        <form action=/plants/add_new method=POST id="new_plant_form">
           <label for="member_name">Enter your member id</label><br>
           <input type="text" name="member_name" value="{{current_member_name}}" autocomplete="member_name" id="member_name" minlenght="2" maxlength="10" required><br>
             <label for="plant_name">Plant name</label><br>

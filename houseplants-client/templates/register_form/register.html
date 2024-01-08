@@ -4,7 +4,7 @@
 <head>
     <meta charset=utf-8>
     <title>Member registration</title>
-    <link rel="stylesheet" href="/templates/register_and_signin_forms.css">
+    <link rel="stylesheet" href="/auth/templates/register_and_signin_forms.css">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 
     <div class="form_a">
     <h2>Member registration</h2>
-    <form action=/register method=POST id="registerform">
+    <form action=/auth/register method=POST id="registerform">
         <label for="username">Enter username</label><br>
         <input type="text" name="username" value="{{current_username}}" id="username" autocomplete="username" minlength="6"
             maxlength="12" required><br>
@@ -35,7 +35,7 @@
         <br>
         <button type=submit id="button1">Register</button>
     </form>
-    <form action=/signinform method=GET>
+    <form action=/auth/signinform method=GET>
         <button type=submit id="button2">Sign in</button>
     </form>
     </div>
