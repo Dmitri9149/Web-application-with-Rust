@@ -17,8 +17,8 @@ async fn main() -> std::io::Result<()> {
   // get some parameters from .env file 
   // here the SERVER_PORT=localhost:3000
   dotenv().ok();
-  let port = env::var("SERVER_PORT")
-    .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
+  let port = env::var("APP_PORT")
+    .expect("Is APP_PORT set in .env file? From what folder you start server (where in .env file)?");
   println!("Listening on: {}", &port);
 
   let db_url = env::var("DATABASE_URL")
