@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
   println!("Listening on: {}", &port);
 
   let db_url = env::var("DATABASE_URL")
-    .expect("Is DATABASE_URL set in .env file? From what folder you start server (where in .env file)?" );
+    .expect("Is DATABASE_URL set in .env file? Where is the .env file located)?" );
   let db_pool = PgPool::connect(&db_url).await.unwrap();
 
     // server state as data 
