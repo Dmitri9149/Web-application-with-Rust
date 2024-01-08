@@ -110,3 +110,33 @@ pub async fn handle_delete_plant(
   let _res = awc_client.delete(delete_url).send().await.unwrap();
   Ok(HttpResponse::Ok().body("Plant record deleted "))
 }
+
+// update already existing plant record using the web::Path 
+pub async fn handle_update_plant(
+  _tmpl: web::Data<tera::Tera>,
+  _app_state: web::Data<AppState>,
+  path: web::Path<(i32, i32)>,
+  params: web::Json<UpdatePlant>
+) -> Result<HttpResponse, Error> {
+  let (member_id, plant_id) = path.into_inner();
+  let update_plant = json!({
+    "plant_name": &params.plant_name,
+    "plant_description": &params.plant_description,
+    "plant_care": &params.plant_care,
+    "plant_alternative_name": &params.plant_alternative_name,
+    "plant_care_difficulty": &params.plant_care_difficulty,
+    "plant_price": &params.plant_price,
+    "plant_extra_info": &params.plant_extra_info,
+  });
+  let awc_client = awc::Client::default();
+  let update_url = format!("http://localhost:3000/plants/{}/{}", member_id, plant_id);
+  let res = awc_client
+              .put(update_url)
+              .send_json(&update_plant)
+              .await
+              .unwrap()
+              .body()
+              .await?;
+  let plant: UpdatePlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+  Ok(HttpResponse::Ok().json(plant))
+}

@@ -2,7 +2,7 @@ use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::{
   show_register_form,show_signin_form, handle_register, handle_signin};
 use crate::handlers::plant::{show_new_plant_form, new_plant_addition, 
-  handle_insert_plant};
+  handle_insert_plant, handle_delete_plant};
 use actix_files as fs;
 use actix_web::web;
 
@@ -50,10 +50,10 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
 //          .service(
 //              web::resource("{member_id}/{plant_id}").route(web::put().to(handle_update_plant)),
 //          )
-//          .service(
-//              web::resource("delete/{member_id}/{plant_id}")
-//                  .route(web::delete().to(handle_delete_plant)),
-//          ),
+          .service(
+              web::resource("delete/{member_id}/{plant_id}")
+                  .route(web::delete().to(handle_delete_plant)),
+          ),
   );
 }
 
