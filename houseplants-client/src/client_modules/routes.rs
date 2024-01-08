@@ -19,14 +19,6 @@ pub fn general_routes(cfg: &mut web::ServiceConfig) {
   cfg.route("/general", web::get().to(general_page_handler));
 }
 
-/*
-// user authorization routes 
-pub fn templates_routes(config: &mut web::ServiceConfig) {
-  config.service(
-  web::scope("")
-    .service(fs::Files::new(
-      "/templates", "./templates").show_files_listing()));
-} */
 
 // user authorization routes 
 pub fn authorization_routes(config: &mut web::ServiceConfig) {
