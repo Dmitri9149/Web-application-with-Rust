@@ -14,22 +14,20 @@ use tera::Tera;
 // entry point to start server 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-  // get some parameters from .env file 
-  // here the SERVER_PORT=localhost:3000
-  dotenv().ok();
-  let port = env::var("APP_PORT")
-    .expect("Is APP_PORT set in .env file? From what folder you start server (where in .env file)?");
+
+// get host port from .env
+  let port = helpers::get_host_port();
   println!("Listening on: {}", &port);
 
-  let db_url = env::var("DATABASE_URL")
-    .expect("Is DATABASE_URL set in .env file? Where is the .env file located)?" );
+  // get client's db_url and db_pool
+  let db_url = helpers::get_db_url_client();
   let db_pool = PgPool::connect(&db_url).await.unwrap();
 
-    // server state as data 
-    let shared_data = web::Data::new(state::AppState {
-      web_client_is_running_message: "The web client test page is running".to_string(),
-      db: db_pool, 
-    });
+  // server state as data 
+  let shared_data = web::Data::new(state::AppState {
+    web_client_is_running_message: "The web client test page is running".to_string(),
+    db: db_pool, 
+  });
 
   // Construct App 
   let app = move || {
