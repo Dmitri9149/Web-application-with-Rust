@@ -5,8 +5,6 @@ use crate::state::AppState;
 use actix_web::{web, Error, HttpResponse, Result};
 use crate::errors::CustomError;
 use serde_json::json;
-use dotenv::dotenv;
-use std::env;
 use crate::helpers::{get_port};
 
 
@@ -34,13 +32,7 @@ pub async fn new_plant_addition(
   params: web::Form<NewPlantForm>,
 ) -> Result<HttpResponse, Error> {
 
-  // url of resource on server 
-  dotenv().ok();
-  let server_port = env::var("SERVER_PORT")
-    .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
   let resource_url = format!("http://{}/plants/", get_port());
-
-
   let mut ctx = tera::Context::new();
   let username = params.member_name.clone();
   let user = get_user_db(&app_state.db, 
@@ -86,12 +78,7 @@ pub async fn handle_insert_plant(
   params: web::Json<NewPlant>
 ) -> Result<HttpResponse, Error> {
 
-  // url of resource on server 
-  dotenv().ok();
-  let server_port = env::var("SERVER_PORT")
-    .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
   let resource_url = format!("http://{}/plants/", get_port());
-
   let member_id = path.into_inner();
   let new_plant = json!({
     "member_id": member_id,
@@ -106,7 +93,6 @@ pub async fn handle_insert_plant(
   println!("New plant {:?}", new_plant);
   let awc_client = awc::Client::default();
   let res = awc_client
-//              .post("http://localhost:3000/plants/")
               .post(resource_url)
               .send_json(&new_plant)
               .await
@@ -126,10 +112,6 @@ pub async fn handle_delete_plant(
   path: web::Path<(i32, i32)>
 ) -> Result<HttpResponse, Error> {
 
-  // url of resource on server 
-  dotenv().ok();
-  let server_port = env::var("SERVER_PORT")
-    .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
   let (member_id, plant_id) = path.into_inner();
   let delete_url= format!("http://{}/plants/{}/{}", get_port(), member_id, plant_id);
 
