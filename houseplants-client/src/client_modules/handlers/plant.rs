@@ -7,6 +7,8 @@ use crate::errors::CustomError;
 use serde_json::json;
 use dotenv::dotenv;
 use std::env;
+use crate::helpers::{get_port};
+
 
 pub async fn show_new_plant_form(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
   let mut ctx = tera::Context::new();
@@ -36,7 +38,7 @@ pub async fn new_plant_addition(
   dotenv().ok();
   let server_port = env::var("SERVER_PORT")
     .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
-  let resource_url = format!("http://{}/plants/", server_port);
+  let resource_url = format!("http://{}/plants/", get_port());
 
 
   let mut ctx = tera::Context::new();
@@ -88,7 +90,7 @@ pub async fn handle_insert_plant(
   dotenv().ok();
   let server_port = env::var("SERVER_PORT")
     .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
-  let resource_url = format!("http://{}/plants/", server_port);
+  let resource_url = format!("http://{}/plants/", get_port());
 
   let member_id = path.into_inner();
   let new_plant = json!({
@@ -129,7 +131,7 @@ pub async fn handle_delete_plant(
   let server_port = env::var("SERVER_PORT")
     .expect("Is SERVER_PORT set in .env file? From what folder you start server (where in .env file)?");
   let (member_id, plant_id) = path.into_inner();
-  let delete_url= format!("http://{}/plants/{}/{}", server_port, member_id, plant_id);
+  let delete_url= format!("http://{}/plants/{}/{}", get_port(), member_id, plant_id);
 
   let awc_client = awc::Client::default();
   let _res = awc_client.delete(delete_url).send().await.unwrap();

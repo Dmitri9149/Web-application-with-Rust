@@ -3,7 +3,7 @@ mod client_modules;
 use actix_web::{web, App, HttpServer};
 use actix_web::web::Data;
 use dotenv::dotenv;
-use client_modules::{db_access, errors, handlers, model, routes, state};
+use client_modules::{db_access, errors, handlers, model, routes, state, helpers};
 use routes::{authorization_routes, plant_routes, 
   home_routes, general_routes};
 use sqlx::postgres::PgPool;
