@@ -137,7 +137,7 @@ pub async fn handle_update_plant(
     "plant_extra_info": &params.plant_extra_info,
   });
   let awc_client = awc::Client::default();
-  let update_url = format!("http://localhost:3000/plants/{}/{}", member_id, plant_id);
+  let update_url = format!("http://{}/plants/{}/{}", get_server_port(), member_id, plant_id);
   let res = awc_client
               .put(update_url)
               .send_json(&update_plant)
