@@ -19,6 +19,8 @@ mod routes;
 mod state;
 #[path = "../server_modules/errors.rs"]
 mod errors;
+#[path = "../server_modules/helpers.rs"]
+mod helpers;
 
 // entry point to start server 
 
