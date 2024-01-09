@@ -26,11 +26,13 @@ mod helpers;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-  // get some parameters from .env file 
-  // here the SERVER_PORT=localhost:3000
-  dotenv().ok();
-  let db_url = env::var("DATABASE_URL")
-    .expect("Is DATABASE_URL set in .env file? From what folder you start server (where in .env file)?" );
+
+  // get host port from .env
+  let port = helpers::get_server_port();
+  println!("Listening on: {}", &port);
+
+  // get client's db_url and db_pool
+  let db_url = helpers::get_db_url_server();
   let db_pool = PgPool::connect(&db_url).await.unwrap();
 
   let shared_data = web::Data::new(AppState {
@@ -47,9 +49,6 @@ async fn main() -> std::io::Result<()> {
       .configure(member_routes)
       .configure(plant_routes)
   };
-  let port = env::var("SERVER_PORT")
-    .expect("Is SERVER_PORT set in .env file? Where is the .env file located?");
-  println!("Listening on: {}", &port);
 
   // Start server 
   HttpServer::new(app).bind(port).unwrap().run().await
