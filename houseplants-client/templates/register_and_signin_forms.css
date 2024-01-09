@@ -24,3 +24,7 @@
   border: 3px solid #ad5921;
   padding: 10px;
 }
+
+#nav_form {
+  display: inline-block;
+}
