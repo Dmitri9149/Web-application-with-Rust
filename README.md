@@ -3,4 +3,4 @@ The work is in progress. It is to be application for a society interested in hou
 
 I use [Actix Web](https://actix.rs/) Rust web framework , [Tera Templates](https://keats.github.io/tera/docs/), [PostgreSQL](https://www.postgresql.org/) as database. 
 
-In general I follow the approach from the books: [The Rust Programming Language; Final Project: Building a Multithreaded Web Server](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html) and [] 
+In general,  I follow the approach from the books: [The Rust Programming Language; Final Project: Building a Multithreaded Web Server](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html) and [Prabhu Eshwarla, Rust Servers, Services, and Apps](https://www.manning.com/books/rust-servers-services-and-apps), [Prabhu Eshwarla, Rust Servers, Services, and Apps, GutHub code](https://github.com/peshwar9/rust-servers-services-apps)
