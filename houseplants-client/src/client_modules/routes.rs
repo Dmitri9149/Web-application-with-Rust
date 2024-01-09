@@ -1,6 +1,7 @@
 use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::{
-  show_register_form,show_signin_form, handle_register, handle_signin};
+  show_register_form,show_signin_form, handle_register, handle_signin,
+  handle_register_redirect};
 use crate::handlers::plant::{show_new_plant_form, new_plant_addition, 
   handle_insert_plant, handle_delete_plant, handle_update_plant};
 use actix_files as fs;
@@ -32,6 +33,7 @@ pub fn authorization_routes(config: &mut web::ServiceConfig) {
     .service(web::resource("/").route(web::get().to(show_register_form)))
     .service(web::resource("/signinform").route(web::get().to(show_signin_form)))
     .service(web::resource("/signin").route(web::post().to(handle_signin)))
+    .service(web::resource("/register").route(web::get().to(handle_register_redirect)))
     .service(web::resource("/register").route(web::post().to(handle_register)))
   );
 }

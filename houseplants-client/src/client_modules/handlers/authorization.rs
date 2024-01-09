@@ -36,7 +36,7 @@ Result<HttpResponse, Error> {
   Ok(HttpResponse::Ok().content_type("text.html").body(s))
 }
 
-// register a new member or make signing of already existed member
+// register a new member or signing of already existed member
 pub async fn handle_register(
   tmpl: web::Data<tera::Tera>,
   app_state: web::Data<AppState>,
@@ -154,6 +154,11 @@ pub async fn handle_register(
             "Template error".to_string()))?;
   };
   Ok(HttpResponse::Ok().content_type("text/html").body(s))
+}
+
+// handle to redirect GET request to "/auth/register" to "/auth/"" (show register form)
+pub async fn handle_register_redirect(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
+  show_register_form(tmpl).await
 }
 
 
