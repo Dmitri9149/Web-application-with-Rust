@@ -41,6 +41,7 @@ async fn main() -> std::io::Result<()> {
         ::std::process::exit(1);
       }
     };
+    
     App::new()
       .app_data(Data::new(tera.clone()))
       .app_data(shared_data.clone())
