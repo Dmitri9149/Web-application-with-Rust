@@ -150,7 +150,7 @@ pub async fn handle_update_plant(
 }
 
 // show houseplants records for particular member 
-pub async fn handle_show__plants_for_member(
+pub async fn handle_show_plants_for_member(
   _tmpl: web::Data<tera::Tera>,
   _app_state: web::Data<AppState>,
   path: web::Path<(i32,i32)>
