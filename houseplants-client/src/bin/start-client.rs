@@ -1,17 +1,18 @@
-#[path = "../client_modules/mod.rs"]
-mod client_modules;
 use actix_web::{web, App, HttpServer};
 use actix_web::web::Data;
 use dotenv::dotenv;
+use sqlx::postgres::PgPool;
+use std::env;
+use tera::Tera;
+
+#[path = "../client_modules/mod.rs"]
+mod client_modules;
 use client_modules::{db_access, errors, handlers, model, routes, state, helpers};
 use routes::{authorization_routes, plant_routes, 
   home_routes, general_routes};
-use sqlx::postgres::PgPool;
-use std::env;
 
-use tera::Tera;
 
-// entry point to start server 
+// entry point to start server (client side) 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
 
