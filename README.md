@@ -16,4 +16,4 @@ TODO: several more views from DB
 TODO: custom views for members 
 TODO: possibility to add and view interesting facts about plants 
 TODO: possibility for members to make comments 
-TODO: many others  
+TODO: many others  , the work is in progress 
