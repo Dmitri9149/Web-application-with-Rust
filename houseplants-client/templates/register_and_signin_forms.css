@@ -12,7 +12,7 @@
   margin-top: 5px;
   width: 20%;
   min-width: 220px;
-  border: 3px solid #ad5921;
+  border: 2px solid #ad5921;
   padding: 10px;
 }
 
@@ -21,10 +21,66 @@
   margin-top: 5px;
 /*  width: 20%; */
   min-width: 400px;
-  border: 3px solid #ad5921;
+  border: 2px solid #ad5921;
   padding: 10px;
 }
 
 #nav_form {
   display: inline-block;
+}
+                                        
+.header_x {
+    padding: 20px;
+    text-align: center;
+    background: maroon;
+    color: rgb(48, 40, 43);
+    font-size: 30px;
+}
+
+.form_x {
+    margin: auto;
+    width: 20%;
+    min-width: 150px;
+    border: 3px solid #ad5921;
+    padding: 10px;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    font-kerning: normal;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+div {
+/*    text-align: center; */
+    background-color: rgba(241, 235, 235, 0.719);
+}
+
+body {
+/*            background-image: url('/static/background.jpg'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 500px;
+}
+
+#button1 {
+    display: inline-block;
+}
+
+#footer {
+    position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer*/
+    height: 20px;
 }
