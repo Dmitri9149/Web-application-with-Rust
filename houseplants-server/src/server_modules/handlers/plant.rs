@@ -1,5 +1,5 @@
 use crate::db_access::plant::*;
-use crate::server_modules::models::plant::{NewPlant, UpdatePlant};
+use crate::server_modules::model::plant::{NewPlant, UpdatePlant};
 use crate::state::AppState;
 use actix_web::{web, HttpResponse};
 

@@ -1,5 +1,5 @@
 use crate::db_access::member::*;
-use crate::server_modules::models::member::{NewMember, UpdateMember};
+use crate::server_modules::model::member::{NewMember, UpdateMember};
 use crate::state::AppState;
 use actix_web::{web, HttpResponse};
 
