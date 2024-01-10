@@ -1,4 +1,4 @@
-In the project the server and client parts of the web application are written in Rust.    
+In the project the server and client parts of the web application are written in Rust (collected in one workspace).    
 The work is in progress.       
 It is to be an application for society of members interested in houseplants.    
 After registration and login members can read and write about different houseplants, add their own records about plants they care at home or are interested in.   
