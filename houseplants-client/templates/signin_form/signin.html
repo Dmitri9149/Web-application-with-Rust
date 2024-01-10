@@ -1,98 +1,44 @@
-<!doctype html>
-<html>
+{% extends "base/base.html" %}
 
-<head>
-    <meta charset=utf-8>
-    <title>Member registration</title>
+{% block header %}
+<div class="header_a">
+  <h1> House Plants</h1>
+  </div>
+{% endblock header %}
 
-    <style>                                         
-        .header_x {
-            padding: 20px;
-            text-align: center;
-            background: maroon;
-            color: rgb(48, 40, 43);
-            font-size: 30px;
-        }
+{% block navigate %}
+  <div class="nav">
+    <form action=/auth/sign method=GET id="nav_form">
+      <button type=submit id="button2">Sign in </button>
+    </form>
+    <button type=submit id="button2">Button_a</button>
+    <button type=submit id="button2">Button_b</button>
+    <form action=/general/ method="GET" id="nav_form">
+      <button type=submit id="button2">General</button>
+    </form>
+    <form action=/home/ method=GET id="nav_form">
+      <button type=submit id="button2">Home</button>
+    </form>
+    <form action=/auth/register method=GET id="nav_form">
+      <button type=submit id="button2">Register</button>
+    </form>
+  </div>
+{% endblock navigate %}
 
-        .form_x {
-            margin: auto;
-            width: 20%;
-            min-width: 150px;
-            border: 3px solid #ad5921;
-            padding: 10px;
-        }
-
-        html {
-            height: 100%;
-            margin: 0;
-            font-kerning: normal;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        p {
-            text-align: center;
-        }
-
-        div {
-            text-align: center;
-            background-color: rgba(241, 235, 235, 0.719);
-        }
-
-        body {
-/*            background-image: url('/static/background.jpg'); */
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            height: 500px;
-        }
-
-        #button1 {
-            display: inline-block;
-        }
-
-        #footer {
-            position: fixed;
-            padding: 10px 10px 0px 10px;
-            bottom: 0;
-            width: 100%;
-            /* Height of the footer*/
-            height: 20px;
-
-        }
-    </style>
-    <link rel="stylesheet" href="/auth/templates/register_and_signin_forms.css">
-</head>
-
-<body>
-    <div class="header_a">
-    <h1>Welcome to House Plants</h1>
-    <p>Read and Write about Houseplants</p>
-    </div>
-    <div class="form_a">
-    <h2>Member sign in</h2>
+{% block form %}
+  <div class="form_a">
+    <h2>Sign in </h2>
     <form action=/auth/signin method=POST>       
-        <label for="username">Enter username</label><br>            
-        <input type="text" name="username" autocomplete="username" value="{{current_name}}" minlength="6"
-            maxlength="12" id="username" required><br>
-        <label for="password">Enter password</label><br>        
-        <input type="password" name="password" autocomplete="new-password" value="{{current_password}}"
-            minlength="8" maxlength="12" id="password" required><br>
-        <label for="error">                                     
-            <p style="color:red">{{error}}</p>
-        </label><br>
-        <button type=submit id="button1">Sign in</button>       
-    </form>
-    <form action=/auth/ method=GET>                                  
-        <button type=submit id="button1">Register</button>
-    </form>
-    </div>
-    <p>
-    <div id="footer">
-        place for footer
-    </div>
-    </p>
-</body>
-</html>
+      <label for="username">Enter username</label><br>            
+      <input type="text" name="username" autocomplete="username" value="{{current_name}}" minlength="6"
+          maxlength="12" id="username" required><br>
+      <label for="password">Enter password</label><br>        
+      <input type="password" name="password" autocomplete="new-password" value="{{current_password}}"
+          minlength="8" maxlength="12" id="password" required><br>
+      <label for="error">                                     
+          <p style="color:red">{{error}}</p>
+      </label><br>
+      <button type=submit id="button1">Sign in</button>       
+  </form>
+  </div>
+{% endblock form %}
