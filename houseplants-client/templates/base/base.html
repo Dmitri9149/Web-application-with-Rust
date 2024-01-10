@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  {% block head %}
+  <meta charset=utf-8>
+  <title>{% block title %} {% endblock title %}</title>
+  <link rel="stylesheet" href="/auth/templates/register_and_signin_forms.css">
+  {% endblock head %}
+</head>
+
+  <body>
+      <div id="header">
+        {% block header %}
+        {% endblock header %}
+      </div>
+
+      <div id="navigate">
+        {% block navigate %}
+        {% endblock navigate %}
+      </div>
+
+      <div id="form">
+        {% block form %}
+        {% endblock form %}
+      </div>
+
+      <div id="footer">
+        {% block footer %}
+        {% endblock footer %}
+      </div>
+  </body>
+</html>
