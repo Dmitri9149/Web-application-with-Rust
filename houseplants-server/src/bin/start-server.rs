@@ -9,23 +9,6 @@ use std::io;
 use routes::*;
 use state::AppState;
 
-/*
-#[path = "../server_modules/db_access/mod.rs"]
-mod db_access;
-#[path = "../server_modules/handlers/mod.rs"]
-mod handlers;
-#[path = "../server_modules/models/mod.rs"]
-mod models;
-#[path = "../server_modules/routes.rs"]
-mod routes;
-#[path = "../server_modules/state.rs"]
-mod state;
-#[path = "../server_modules/errors.rs"]
-mod errors;
-#[path = "../server_modules/helpers.rs"]
-mod helpers;
-*/
-
 // entry point to start server 
 
 #[actix_rt::main]
