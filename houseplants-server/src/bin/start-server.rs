@@ -1,3 +1,6 @@
+#[path = "../server_modules/mod.rs"]
+mod server_modules;
+use server_modules::{db_access, errors, handlers, models, routes, state, helpers};
 use actix_web::{web, App, HttpServer};
 use dotenv::dotenv;
 use sqlx::postgres::PgPool;
@@ -6,7 +9,7 @@ use std::io;
 use routes::*;
 use state::AppState;
 
-
+/*
 #[path = "../server_modules/db_access/mod.rs"]
 mod db_access;
 #[path = "../server_modules/handlers/mod.rs"]
@@ -21,6 +24,7 @@ mod state;
 mod errors;
 #[path = "../server_modules/helpers.rs"]
 mod helpers;
+*/
 
 // entry point to start server 
 

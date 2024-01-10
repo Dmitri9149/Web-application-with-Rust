@@ -1,4 +1,4 @@
-use crate::models::member::{Member, NewMember, UpdateMember};
+use crate::server_modules::models::member::{Member, NewMember, UpdateMember};
 use sqlx::postgres::PgPool;
 use std::error::Error;
 

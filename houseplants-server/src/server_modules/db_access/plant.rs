@@ -1,4 +1,4 @@
-use crate::models::plant::*;
+use crate::server_modules::models::plant::*;
 use sqlx::postgres::PgPool;
 use std::error::Error;
 
