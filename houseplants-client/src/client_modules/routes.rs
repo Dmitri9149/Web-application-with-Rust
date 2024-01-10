@@ -46,7 +46,6 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
 //          .service(
 //              web::resource("show/{member_id}/{plant_id}").route(web::get().to(handle_show_member_plant)))
       .service(web::resource("/").route(web::get().to(show_new_plant_form)))
-//      .service(web::resource("/").route(web::get().to(show_register_form)))
       .service(web::resource("add_new").route(web::post().to(new_plant_addition)))
       .service(web::resource("new/{member_id}")
         .route(web::post().to(handle_insert_plant)))
