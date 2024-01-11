@@ -173,7 +173,7 @@ pub async fn show_plant_for_member(
 // show particular houseplant record for particular member
 // Tera template is used for handling the view 
 pub async fn show_plant_for_member_render_template(
-  _tmpl: web::Data<tera::Tera>,
+  tmpl: web::Data<tera::Tera>,
   _app_state: web::Data<AppState>,
   path: web::Path<(i32,i32)>
 ) -> Result<HttpResponse, Error> {
@@ -188,7 +188,18 @@ pub async fn show_plant_for_member_render_template(
               .body()
               .await?;
   let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
-  Ok(HttpResponse::Ok().json(plant_response))
+  let mut ctx = tera::Context::new();
+    ctx.insert("current_name", &plant_response.plant_name);
+    ctx.insert("current_alternative_name", &plant_response.plant_alternative_name);
+    ctx.insert("current_description", &plant_response.plant_description);
+    ctx.insert("current_care", &plant_response.plant_care);
+    ctx.insert("current_care_difficulty", &plant_response.plant_care_difficulty);
+    ctx.insert("current_price", &plant_response.plant_price);
+    ctx.insert("current_extra_info", &plant_response.plant_extra_info);
+  let s = tmpl
+    .render("plant_for_member/plant_for_member.html", &ctx)
+    .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
+  Ok(HttpResponse::Ok().content_type("text/html").body(s))
 }
 
 
