@@ -149,8 +149,30 @@ pub async fn handle_update_plant(
   Ok(HttpResponse::Ok().json(plant))
 }
 
-// show particular houseplant record for particular member (return result as http response) 
+// show particular houseplant record for particular member
+// return is in 'row' format, without a template rendering  
 pub async fn show_plant_for_member(
+  _tmpl: web::Data<tera::Tera>,
+  _app_state: web::Data<AppState>,
+  path: web::Path<(i32,i32)>
+) -> Result<HttpResponse, Error> {
+  let (member_id, plant_id) = path.into_inner();
+  let awc_client = awc::Client::default();
+  let member_plant_url = format!("http://{}/plants/{}/{}", get_server_port(), member_id, plant_id);
+  let res = awc_client
+              .get(member_plant_url)
+              .send()
+              .await
+              .unwrap()
+              .body()
+              .await?;
+  let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+  Ok(HttpResponse::Ok().json(plant_response))
+}
+
+// show particular houseplant record for particular member
+// Tera template is used for handling the view 
+pub async fn show_plant_for_member_render_template(
   _tmpl: web::Data<tera::Tera>,
   _app_state: web::Data<AppState>,
   path: web::Path<(i32,i32)>
