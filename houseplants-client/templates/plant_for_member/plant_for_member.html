@@ -1,11 +1,11 @@
 {% extends "base/base.html" %}
 
-{% block title %} Show member's houseplants {% endblock title %}
+{% block title %} Home {% endblock title %}
 
 {% block header %}
 <div class="header_a">
-  <h1>House Plants</h1>
-  <p>Show member's houseplants</p>
+  <h1>Welcome to House Plants</h1>
+  <p>Read and Write about Houseplants</p>
   </div>
 {% endblock header %}
 
@@ -31,15 +31,15 @@
   </div>
 {% endblock navigate %}
 
-<!--
 {% block content %}
-  <p>Plant name:{{name}}</p>
-  <p>Alternative name: {{current_alternative_name}}</p>
-  <p>Description: {{current_description}}</p>
-  <p>Care: {{current_care}}</p>
-  <p>Is it difficult to care: {{current_care_difficulty}}</p>
-  <p>Price: {{current_price}}</p>
-  <p>Extra info: {{current_extra_info}}</p> 
+  <div class="nav">
+    <p>Plant name: {{current_name}}</p>
+    <p>Description: {{current_description}}</p>
+    <p>Care: {{current_care}}</p>
+    <p>Care difficulty: {{current_care_difficulty}}</p>
+    <p>Alternative name: {{current_alternative_name}}</p>
+    <p>Plant price: {{current_price}}</p>
+    <p>Extra info: {{current_extra_info}}</p>
+  </div>
 {% endblock content %}
 
--->
