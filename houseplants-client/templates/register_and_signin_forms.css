@@ -12,7 +12,8 @@
   margin-top: 5px;
   width: 20%;
   min-width: 300px;
-  color: rgb(48, 40, 43);
+/*   color: rgb(48, 40, 43); */
+  color: black;
   background-color: rgba(241, 235, 235, 0.719);
   border: 2px solid #ad5921;
   padding: 10px;
@@ -23,7 +24,8 @@
   margin-top: 5px;
 /*  width: 20%; */
   min-width: 400px;
-  color: rgb(48, 40, 43);
+/*  color: rgb(48, 40, 43); */
+  color:black;
   background-color: rgba(241, 235, 235, 0.719);
   border: 2px solid #ad5921;
   padding: 10px;
@@ -35,6 +37,11 @@
 
 #nav_form {
   display: inline-block;
+}
+
+#button2 {
+  color:white;
+  background-color: maroon;
 }
 
                                       
