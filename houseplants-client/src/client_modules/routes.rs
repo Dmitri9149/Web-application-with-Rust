@@ -1,6 +1,7 @@
 use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::*;
 use crate::handlers::plant::*;
+use crate::handlers::member::*;
 use actix_files as fs;
 use actix_web::web;
 
@@ -52,5 +53,14 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
         .route(web::delete().to(handle_delete_plant)))
   );
 }
+
+// manage members records  
+pub fn member_routes(config: &mut web::ServiceConfig) {
+  config.service(
+  web::scope("/members")
+      .service(web::resource("/").route(web::get().to(show_members)))
+  );
+}
+
 
 
