@@ -1,6 +1,7 @@
 /target
 .env
 bash_scripts
+clipboard
 test.http
 tests/
 /tests
