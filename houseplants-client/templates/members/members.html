@@ -31,7 +31,11 @@
   </div>
 {% endblock navigate %}
 
+
 <div id="content">
   {% block content %}
+  {% for member in members %}
+  <p>{{loop.index}}. {{member.member_name}}</p>
+  {% endfor %}
   {% endblock content %}
 </div>
