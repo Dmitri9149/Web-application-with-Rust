@@ -8,8 +8,7 @@ use tera::Tera;
 #[path = "../client_modules/mod.rs"]
 mod client_modules;
 use client_modules::{db_access, errors, handlers, model, routes, state, helpers};
-use routes::{authorization_routes, plant_routes, 
-  home_routes, general_routes};
+use routes::*;
 
 
 // entry point to start server (client side) 
@@ -50,6 +49,7 @@ async fn main() -> std::io::Result<()> {
       .configure(general_routes)
       .configure(authorization_routes)
       .configure(plant_routes)
+      .configure(member_routes)
   };
  
   // Start server 
