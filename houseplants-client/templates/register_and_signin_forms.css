@@ -29,10 +29,15 @@
   padding: 10px;
 }
 
+.plant {
+  color: red;
+}
+
 #nav_form {
   display: inline-block;
 }
-                                        
+
+                                      
 .header_x {
     padding: 20px;
     text-align: center;
@@ -60,15 +65,14 @@ h1 {
 }
 
 p {
-    text-align: center;
+    text-align: left;
 }
 
-/*
 div {
-    text-align: center; 
+    text-align: left; 
     background-color: rgba(241, 235, 235, 0.719); 
 }
-*/
+
 
 body {
 /*            background-image: url('/static/background.jpg'); */
