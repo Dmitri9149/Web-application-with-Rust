@@ -4,7 +4,7 @@ use crate::handlers::authorization::{
   handle_register_redirect};
 use crate::handlers::plant::{show_new_plant_form, new_plant_addition, 
   handle_insert_plant, handle_delete_plant, handle_update_plant,
-  handle_show_plants_for_member};
+  show_plant_for_member};
 use actix_files as fs;
 use actix_web::web;
 
@@ -45,7 +45,7 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
   config.service(
   web::scope("/plants")
       .service(web::resource("show/{member_id}/{plant_id}")
-        .route(web::get().to(handle_show_plants_for_member)))
+        .route(web::get().to(show_plant_for_member)))
       .service(web::resource("/").route(web::get().to(show_new_plant_form)))
       .service(web::resource("add_new").route(web::post().to(new_plant_addition)))
       .service(web::resource("new/{member_id}")
