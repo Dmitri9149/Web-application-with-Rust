@@ -22,13 +22,7 @@ pub async fn show_members(
               .await?;
   let members_response: Vec<MemberResponse> = serde_json::from_str(&std::str::from_utf8(&res)?)?;
   let mut ctx = tera::Context::new();
-    ctx.insert("members", &members_response);
-/*    ctx.insert("current_alternative_name", &plant_response.plant_alternative_name);
-    ctx.insert("current_description", &plant_response.plant_description);
-    ctx.insert("current_care", &plant_response.plant_care);
-    ctx.insert("current_care_difficulty", &plant_response.plant_care_difficulty);
-    ctx.insert("current_price", &plant_response.plant_price);
-    ctx.insert("current_extra_info", &plant_response.plant_extra_info); */ 
+    ctx.insert("members", &members_response); 
   let s = tmpl
     .render("members/members.html", &ctx)
     .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
