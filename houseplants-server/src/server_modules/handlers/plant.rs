@@ -14,6 +14,14 @@ pub async fn get_plants_for_member(
     HttpResponse::Ok().json(plants)
 }
 
+pub async fn get_plants(
+  app_state: web::Data<AppState>
+) -> HttpResponse {
+    let plants = get_plants_db(&app_state.db)
+      .await;
+    HttpResponse::Ok().json(plants)
+}
+
 pub async fn get_plant_details(
   app_state: web::Data<AppState>,
   path: web::Path<(i32, i32)>,
