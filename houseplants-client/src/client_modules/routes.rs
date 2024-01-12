@@ -51,6 +51,7 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
         .route(web::put().to(handle_update_plant)))
       .service(web::resource("delete/{member_id}/{plant_id}")
         .route(web::delete().to(handle_delete_plant)))
+        .service(web::resource("/get_all").route(web::get().to(show_plants)))
   );
 }
 
