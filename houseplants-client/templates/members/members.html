@@ -1,12 +1,16 @@
+{% import "base/macros/header.html" as macros %}
 {% extends "base/base.html" %}
 
 {% block title %} List of members {% endblock title %}
 
 {% block header %}
-<div class="header_a">
-  <h1>House Plants</h1>
-  <p>The list of Houseplants members</p>
-  </div>
+{{
+  macros::header(
+  title="House Plants", 
+  paragraph="The list of House Plants members.", 
+  class="header_a"
+  )
+}}
 {% endblock header %}
 
 {% block navigate %}

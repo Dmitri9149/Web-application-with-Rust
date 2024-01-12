@@ -1,11 +1,16 @@
+{% import "base/macros/header.html" as macros %}
 {% extends "base/base.html" %}
 
 {% block title %} Register {% endblock title %}
 
 {% block header %}
-<div class="header_a">
-  <h1> House Plants</h1>
-  </div>
+{{
+  macros::header(
+  title="House Plants", 
+  paragraph="", 
+  class="header_a"
+  )
+}}
 {% endblock header %}
 
 {% block navigate %}
