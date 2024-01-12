@@ -147,3 +147,16 @@ pub async fn update_plant_details_db (
         .unwrap();
     plant
 }
+
+// get all plants records from DB   
+pub async fn get_plants_db(
+    pool: &PgPool,
+) -> Vec<Plant> {
+    sqlx::query_as!(
+        Plant, 
+        "SELECT * FROM plant"
+        )
+        .fetch_all(pool)
+        .await
+        .unwrap()
+}
