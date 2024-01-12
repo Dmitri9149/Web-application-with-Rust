@@ -15,25 +15,11 @@
 {% endblock header %}
 
 {% block navigate %}
-  <div class="nav">
-    <form action=/auth/signinform method=GET id="nav_form">
-      <button type=submit id="button2">Sign in </button>
-    </form>
-    <form action=/plants/ method=GET id="nav_form">
-      <button type=submit id="button2">Add new plant </button>
-    </form>
-    <button type=submit id="button2">Button_a</button>
-    <button type=submit id="button2">Button_b</button>
-    <form action=/general/ method="GET" id="nav_form">
-      <button type=submit id="button2">General</button>
-    </form>
-    <form action=/home/ method=GET id="nav_form">
-      <button type=submit id="button2">Home</button>
-    </form>
-    <form action=/auth/register method=GET id="nav_form">
-      <button type=submit id="button2">Register</button>
-    </form>
-  </div>
+{{
+  navigate::navigate( 
+  class="nav"
+  )
+}}
 {% endblock navigate %}
 
 {% block form %}
