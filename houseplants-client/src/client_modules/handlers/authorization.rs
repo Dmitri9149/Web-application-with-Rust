@@ -5,6 +5,7 @@ use crate::model::{MemberRegisterForm, MemberResponse, User, MemberSigninForm};
 use actix_web::{web, Error, HttpResponse, Result};
 use argon2::{self, Config};
 use serde_json::json;
+use crate::helpers::{get_server_port};
 
 // show form for member registration 
 pub async fn show_register_form(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
@@ -66,8 +67,9 @@ pub async fn handle_register(
         "member_info": &params.info
       });
       let awc_client = awc::Client::default();
+      let resource_url = format!("http://{}/members/", get_server_port());
       let result = awc_client
-                  .post("http://localhost:3000/members/")
+                  .post(resource_url)
                   .send_json(&new_member)
                   .await
                   .unwrap()
