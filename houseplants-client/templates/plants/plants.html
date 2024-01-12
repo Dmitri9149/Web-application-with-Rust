@@ -1,0 +1,46 @@
+{% import "base/macros/header.html" as macros %}
+{% extends "base/base.html" %}
+
+{% block title %} List of members {% endblock title %}
+
+{% block header %}
+{{
+  macros::header(
+  title="House Plants", 
+  paragraph="The list of House Plants members.", 
+  class="header_a"
+  )
+}}
+{% endblock header %}
+
+{% block navigate %}
+  <div class="nav">
+    <form action=/auth/signinform method=GET id="nav_form">
+      <button type=submit id="button2">Sign in </button>
+    </form>
+    <form action=/plants/ method=GET id="nav_form">
+      <button type=submit id="button2">Add new plant </button>
+    </form>
+    <button type=submit id="button2">Button_a</button>
+    <button type=submit id="button2">Button_b</button>
+    <form action=/general/ method="GET" id="nav_form">
+      <button type=submit id="button2">General</button>
+    </form>
+    <form action=/home/ method=GET id="nav_form">
+      <button type=submit id="button2">Home</button>
+    </form>
+    <form action=/auth/register method=GET id="nav_form">
+      <button type=submit id="button2">Register</button>
+    </form>
+  </div>
+{% endblock navigate %}
+
+
+<div id="content">
+  {% block content %}
+    {% for plant in plants %}
+    <p>{{loop.index}}. {{plant.plant_name}}</p>
+    <p>{{loop.index}}. {{plant.plant_description}}</p>
+    {% endfor %}
+  {% endblock content %}
+</div>
