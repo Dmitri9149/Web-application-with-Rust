@@ -17,6 +17,7 @@ pub async fn get_plants_for_member_db(
         .unwrap()
 }
 
+// get plant details for particular member and particular plant 
 pub async fn get_plant_details_db(pool: &PgPool, member_id: i32, plant_id: i32
 ) -> Plant {
     // Prepare SQL statement
@@ -55,6 +56,7 @@ pub async fn post_new_plant_db(
     plant_row
 }
 
+// delete plant record 
 pub async fn delete_plant_db(
     pool: &PgPool,
     member_id: i32, 
@@ -71,6 +73,7 @@ pub async fn delete_plant_db(
     format!("Deleted {:#?} record", plant)
 }
 
+// update plant record 
 pub async fn update_plant_details_db (
     pool: &PgPool,
     member_id: i32,
