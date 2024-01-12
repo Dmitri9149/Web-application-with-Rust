@@ -202,4 +202,27 @@ pub async fn show_plant_for_member_render_template(
   Ok(HttpResponse::Ok().content_type("text/html").body(s))
 }
 
+// view list of all plant records in House Plants 
+// Tera template is used for handling the view 
+pub async fn show_plants(
+  tmpl: web::Data<tera::Tera>,
+) -> Result<HttpResponse, Error> {
+  let awc_client = awc::Client::default();
+  let plants_url = format!("http://{}/plants/", get_server_port());
+  let res = awc_client
+              .get(plants_url)
+              .send()
+              .await
+              .unwrap()
+              .body()
+              .await?;
+  let plants_response: Vec<NewPlantResponse> = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+  let mut ctx = tera::Context::new();
+    ctx.insert("plants", &plants_response); 
+  let s = tmpl
+    .render("plants/plants.html", &ctx)
+    .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
+  Ok(HttpResponse::Ok().content_type("text/html").body(s))
+}
+
 
