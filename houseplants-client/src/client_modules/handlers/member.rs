@@ -21,7 +21,6 @@ pub async fn show_members(
               .body()
               .await?;
   let members_response: Vec<MemberResponse> = serde_json::from_str(&std::str::from_utf8(&res)?)?;
-  println!("Members {:?}", &members_response);
   let mut ctx = tera::Context::new();
     ctx.insert("members", &members_response);
 /*    ctx.insert("current_alternative_name", &plant_response.plant_alternative_name);
