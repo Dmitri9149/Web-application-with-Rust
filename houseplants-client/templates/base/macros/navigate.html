@@ -1,21 +1,5 @@
-{% import "base/macros/header.html" as macros %}
-{% import "base/macros/navigate.html" as navigate %}
-{% extends "base/base.html" %}
-
-{% block title %} List of plants {% endblock title %}
-
-{% block header %}
-{{
-  macros::header(
-  title="House Plants", 
-  paragraph="The list of all plant records in House Plants.", 
-  class="header_a"
-  )
-}}
-{% endblock header %}
-
-{% block navigate %}
-  <div class="nav">
+{% macro navigate(class) %}
+  <div class={{class}}>
     <form action=/auth/signinform method=GET id="nav_form">
       <button type=submit id="button2">Sign in </button>
     </form>
@@ -34,14 +18,4 @@
       <button type=submit id="button2">Register</button>
     </form>
   </div>
-{% endblock navigate %}
-
-
-<div id="content">
-  {% block content %}
-    {% for plant in plants %}
-    <p>{{loop.index}}. {{plant.plant_name}}</p>
-    <p>{{loop.index}}. {{plant.plant_description}}</p>
-    {% endfor %}
-  {% endblock content %}
-</div>
+{% endmacro header %}
