@@ -21,7 +21,7 @@ pub async fn show_register_form(tmpl: web::Data<tera::Tera>) -> Result<HttpRespo
   Ok(HttpResponse::Ok().content_type("text/html").body(s))
 }
 
-// show form for signin of already registered member
+// show form for sign in of already registered member
 pub async fn show_signin_form(tmpl: web::Data<tera::Tera>) -> 
 Result<HttpResponse, Error> {
   let mut ctx = tera::Context::new();
@@ -80,7 +80,7 @@ pub async fn handle_register(
       );
 
       // Hashing the password to store it in DB 
-      let salt = b"somerandomsalt";
+      let salt = b"random_salt";
       let config = Config::default();
       let hash = argon2::hash_encoded(
         params.password.clone().as_bytes(),
@@ -108,7 +108,7 @@ pub async fn handle_register(
  }
 
 // handle signing of already existed member 
- pub async fn handle_signin(
+pub async fn handle_signin(
   tmpl: web::Data<tera::Tera>,
   app_state: web::Data<AppState>,
   params: web::Form<MemberSigninForm>,
@@ -156,7 +156,7 @@ pub async fn handle_register(
   Ok(HttpResponse::Ok().content_type("text/html").body(s))
 }
 
-// handle to redirect GET request to "/auth/register" to "/auth/"" (show register form)
+// redirect GET request to "/auth/register" to "/auth/"" (show register form)
 pub async fn handle_register_redirect(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
   show_register_form(tmpl).await
 }
