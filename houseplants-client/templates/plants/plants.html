@@ -22,11 +22,13 @@
 }}
 {% endblock navigate %}
 
-<div id="content">
-  {% block content %}
+{% block content %}
+  <div id="content" class="nav">
     {% for plant in plants %}
-    <p>{{loop.index}}. {{plant.plant_name}}</p>
-    <p>{{loop.index}}. {{plant.plant_description}}</p>
+    <li key="{{loop.index}}" style="margin: left 5px;;">
+      <div>{{plant.plant_name}}</div>
+      <div>{{plant.plant_description}}</div>
+    </li>
     {% endfor %}
-  {% endblock content %}
-</div>
+  </div>
+ {% endblock content %}
