@@ -96,11 +96,13 @@ body {
     display: inline-block;
 }
 
-#footer {
+.footer {
     position: fixed;
-    padding: 10px 10px 0px 10px;
+/*   padding: 1px 1px 10px 1px; */
+    padding: 0px 0px 10px 0px ;
     bottom: 0;
     width: 100%;
     /* Height of the footer*/
-    height: 20px;
+    height: 25px;
+    background-color: maroon;
 }
