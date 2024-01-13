@@ -26,8 +26,15 @@
   <div id="content" class="nav">
     {% for plant in plants %}
     <li key="{{loop.index}}" style="margin: left 5px;;">
-      <div>{{plant.plant_name}}</div>
+      <div>
+        <span style="color:maroon; font-weight: bold;;">{{plant.plant_name}}</span>
+        <span>&nbsp;&nbsp;&nbsp;Alternative name: {{plant.plant_alternative_name}}</span>
+      </div>
       <div>{{plant.plant_description}}</div>
+      <div>{{plant.plant_care}}</div>
+      <div>{{plant.plant_care_difficulty}}</div>
+      <div>{{plant.plant_extra_info}}</div>
+      <div>Possible price: {{plant.plant_price}}</div>
     </li>
     {% endfor %}
   </div>
