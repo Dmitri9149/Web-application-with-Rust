@@ -48,11 +48,16 @@ and
 ```
 client_modules
 ```   
-to populate the databases (change the placeholders path.to.file..... to real paths).   
+to populate the databases (change the placeholders path.to.file..... to real paths) run:      
+(find the files in ```server_modules```)     
 ```
 psql -U truuser -d houseplants_a < path.to.file_plants_and_members.sql
 ```
-and  
+```
+psql -U truuser -d houseplants_a < path.to.file_interesting_facts.sql
+```
+(find the file in ```client_modules```) 
+
 ```
 psql -U truuser -d  < path.to.file_user.sql
 ``` 
