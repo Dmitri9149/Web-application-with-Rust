@@ -25,7 +25,12 @@
   {% block content %}
   <div id="content" class="nav">
     {% for member in members %}
-    <p>{{loop.index}}. {{member.member_name}}</p>
+    <li key="{{loop.index}}" style="margin: left 5px;;">
+      <div>
+        <span style="color:maroon; font-weight: bold;;">{{member.member_name}}</span>
+      </div>
+      <div>{{member.member_info}}</div>
+    </li>
     {% endfor %}
-  </div>  
+  </div>
   {% endblock content %}
