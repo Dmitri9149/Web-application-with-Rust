@@ -1,5 +1,9 @@
-{% macro navigate(div_class, form_class, button1_class, button2_class) %}
+{% macro navigate(div_class, form_class,
+   button1_class, button2_class, button3_class="button3") %}
   <div class={{div_class}}>
+    <form action=/home/ method=GET class={{form_class}}>
+      <button type=submit class={{button3_class}}>Home</button>
+    </form>
     <form action=/auth/signinform method=GET class={{form_class}}>
       <button type=submit class={{button1_class}}>Sign in </button>
     </form>
@@ -19,9 +23,6 @@
     <button type=submit class={{button2_class}}>Button_b</button>
     <form action=/general/ method="GET" class={{form_class}}>
       <button type=submit class={{button2_class}}>General</button>
-    </form>
-    <form action=/home/ method=GET class={{form_class}}>
-      <button type=submit class={{button2_class}}>Home</button>
     </form>
     <form action=/facts/ method=GET class={{form_class}}>
       <button type=submit class={{button2_class}}> Interesting facts </button>
