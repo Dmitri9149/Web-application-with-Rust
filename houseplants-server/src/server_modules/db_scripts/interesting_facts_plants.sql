@@ -22,7 +22,7 @@ insert into interesting_fact
   fact_id, member_id, content, ref_to_origin, posted_time
 )
 values(1, 1,
- '(May be) the oldest pot plant in the world. It is a giant cycad or Encephalartos altensteinii, native to the Eastern Cape province of South Africa and brought to the UK in 1775 by the botanist Francis Masson.',
+ '(May be) .. the oldest pot plant .. is a giant cycad or Encephalartos altensteinii, native to the Eastern Cape province of South Africa and brought to the UK in 1775 by the botanist Francis Masson.',
  'Google search',
  '2023-04-12 05:40:02');
 

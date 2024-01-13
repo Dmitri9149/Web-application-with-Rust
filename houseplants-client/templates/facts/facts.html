@@ -1,0 +1,46 @@
+{% import "base/macros/header.html" as macros %}
+{% import "base/macros/navigate.html" as navigate %}
+{% import "base/macros/footer.html" as footer %}
+{% extends "base/base.html" %}
+
+{% block title %} Interesting facts {% endblock title %}
+
+{% block header %}
+{{
+  macros::header(
+  title="House Plants", 
+  paragraph="The list of all interesting facts about plants.", 
+  class="header_a"
+  )
+}}
+{% endblock header %}
+
+{% block navigate %}
+{{
+  navigate::navigate( 
+  class="nav"
+  )
+}}
+{% endblock navigate %}
+
+{% block content %}
+  <div id="content" class="nav">
+    {% for fact in facts %}
+    <li key="{{loop.index}}" style="margin: left 5px;;">
+      <div>
+        <span style="color:maroon; font-weight: bold;;">{{fact.content}}</span>
+      </div>
+      <div>{{fact.ref_to_origin}}</div>
+    </li>
+    {% endfor %}
+  </div>
+ {% endblock content %}
+
+ {% block footer %}
+ {{
+   footer::footer( 
+   text="Plants first appeared on land about 460 million years ago",
+   class="footer"
+   )
+ }}
+ {% endblock footer %}

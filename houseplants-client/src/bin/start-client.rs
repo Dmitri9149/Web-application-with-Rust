@@ -49,6 +49,7 @@ async fn main() -> std::io::Result<()> {
       .configure(authorization_routes)
       .configure(plant_routes)
       .configure(member_routes)
+      .configure(interesting_fact_routes)
   };
  
   // Start server 

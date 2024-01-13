@@ -134,3 +134,32 @@ pub struct NewPlantForm {
     pub plant_price: Option<i32>,
     pub plant_extra_info: Option<String>,
 }
+
+// Struct to hold user-provided details to create a new interesting fact record
+#[derive(Deserialize, Debug, Clone)]
+pub struct NewFact {
+    pub content: String,
+    pub ref_to_origin: String,
+}
+
+// Struct to hold the response from server after creation of a new interesting fact 
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NewFactResponse {
+    pub fact_id: i32,
+    pub member_id: i32,
+    pub content: String,
+    pub ref_to_origin: String,
+}
+
+// From trait implementation to convert json response from server into a Rust struct
+impl From<web::Json<NewFactResponse>> for NewFactResponse {
+    fn from(new_fact: web::Json<NewFactResponse>) -> Self {
+        NewFactResponse {
+            member_id: new_fact.member_id,
+            fact_id: new_fact.fact_id,
+            content: new_fact.content.clone(),
+            ref_to_origin: new_fact.ref_to_origin.clone(),
+        }
+    }
+}
+

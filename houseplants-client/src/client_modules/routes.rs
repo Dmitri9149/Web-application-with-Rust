@@ -2,6 +2,7 @@ use crate::handlers::{home::*, general::*};
 use crate::handlers::authorization::*;
 use crate::handlers::plant::*;
 use crate::handlers::member::*;
+use crate::handlers::interesting_fact::*;
 use actix_files as fs;
 use actix_web::web;
 
@@ -63,5 +64,16 @@ pub fn member_routes(config: &mut web::ServiceConfig) {
   );
 }
 
+// routes for handling members 
+pub fn interesting_fact_routes(cfg: &mut web::ServiceConfig) {
+  cfg.service(
+    web::scope("/facts")
+//    .route("/", web::post().to(post_new_fact))
+    .route("/", web::get().to(show_interesting_facts))
+//    .route("/{member_id}", web::get().to(get_fact_details))
+//    .route("/{member_id}", web::delete().to(delete_fact))
+//    .route("/{member_id}", web::put().to(update_interesting_fact))
+  );
+}
 
 
