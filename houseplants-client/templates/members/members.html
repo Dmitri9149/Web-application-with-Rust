@@ -22,10 +22,10 @@
 }}
 {% endblock navigate %}
 
-<div id="content">
   {% block content %}
+  <div id="content" class="nav">
     {% for member in members %}
     <p>{{loop.index}}. {{member.member_name}}</p>
     {% endfor %}
+  </div>  
   {% endblock content %}
-</div>
