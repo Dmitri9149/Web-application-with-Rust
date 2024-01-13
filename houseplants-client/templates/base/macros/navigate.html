@@ -1,30 +1,30 @@
-{% macro navigate(class) %}
-  <div class={{class}}>
-    <form action=/auth/signinform method=GET id="nav_form">
-      <button type=submit id="button1">Sign in </button>
+{% macro navigate(div_class, form_class, button1_class, button2_class) %}
+  <div class={{div_class}}>
+    <form action=/auth/signinform method=GET class={{form_class}}>
+      <button type=submit class={{button1_class}}>Sign in </button>
     </form>
-    <button type=submit id="button1">Sign out</button>
-    <form action=/auth/register method=GET id="nav_form">
-      <button type=submit id="button1">Register</button>
+    <button type=submit class={{button1_class}}>Sign out</button>
+    <form action=/auth/register method=GET class={{form_class}}>
+      <button type=submit class={{button1_class}}>Register</button>
     </form>
-    <form action=/plants/ method=GET id="nav_form">
-      <button type=submit id="button2">Add new plant </button>
+    <form action=/plants/ method=GET class={{form_class}}>
+      <button type=submit class={{button2_class}}>Add new plant </button>
     </form>
-    <form action=/plants/get_all method=GET id="nav_form">
-      <button type=submit id="button2">List of plants </button>
+    <form action=/plants/get_all method=GET class={{form_class}}>
+      <button type=submit class={{button2_class}}>List of plants </button>
     </form>
-    <form action=/members/ method=GET id="nav_form">
-      <button type=submit id="button2">List of members </button>
+    <form action=/members/ method=GET class={{form_class}}>
+      <button type=submit class={{button2_class}}>List of members </button>
     </form>
-    <button type=submit id="button2">Button_b</button>
-    <form action=/general/ method="GET" id="nav_form">
-      <button type=submit id="button2">General</button>
+    <button type=submit class={{button2_class}}>Button_b</button>
+    <form action=/general/ method="GET" class={{form_class}}>
+      <button type=submit class={{button2_class}}>General</button>
     </form>
-    <form action=/home/ method=GET id="nav_form">
-      <button type=submit id="button2">Home</button>
+    <form action=/home/ method=GET class={{form_class}}>
+      <button type=submit class={{button2_class}}>Home</button>
     </form>
-    <form action=/facts/ method=GET id="nav_form">
-      <button type=submit id="button2"> Interesting facts </button>
+    <form action=/facts/ method=GET class={{form_class}}>
+      <button type=submit class={{button2_class}}> Interesting facts </button>
     </form>
   </div>
 {% endmacro header %}
