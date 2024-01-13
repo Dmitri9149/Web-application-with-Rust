@@ -1,9 +1,12 @@
 {% macro navigate(class) %}
   <div class={{class}}>
     <form action=/auth/signinform method=GET id="nav_form">
-      <button type=submit id="button2">Sign in </button>
+      <button type=submit id="button1">Sign in </button>
     </form>
-    <button type=submit id="button2">Sign out</button>
+    <button type=submit id="button1">Sign out</button>
+    <form action=/auth/register method=GET id="nav_form">
+      <button type=submit id="button1">Register</button>
+    </form>
     <form action=/plants/ method=GET id="nav_form">
       <button type=submit id="button2">Add new plant </button>
     </form>
@@ -20,8 +23,8 @@
     <form action=/home/ method=GET id="nav_form">
       <button type=submit id="button2">Home</button>
     </form>
-    <form action=/auth/register method=GET id="nav_form">
-      <button type=submit id="button2">Register</button>
+    <form action=/facts/ method=GET id="nav_form">
+      <button type=submit id="button2">Add new plant </button>
     </form>
   </div>
 {% endmacro header %}
