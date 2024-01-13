@@ -31,3 +31,12 @@
     <p>{{message}}</p>
   </div>
 {% endblock content %}
+
+{% block footer %}
+{{
+  footer::footer( 
+  text="Plants first appeared on land about 460 million years ago",
+  class="footer"
+  )
+}}
+{% endblock footer %}
