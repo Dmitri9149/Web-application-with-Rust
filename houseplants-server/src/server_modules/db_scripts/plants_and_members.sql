@@ -28,7 +28,7 @@ create table member(
     member_info varchar(200) not null
 );
 
-/* Load seed data for testing */
+/* Load seed data */ 
 insert into member(member_id, member_name, member_info)
 values(1,'Dmitri', 'Likes orchids');
 
