@@ -1,5 +1,6 @@
 {% import "base/macros/header.html" as macros %}
 {% import "base/macros/navigate.html" as navigate %}
+{% import "base/macros/footer.html" as footer %}
 {% extends "base/base.html" %}
 
 {% block title %} Home {% endblock title %}
@@ -21,3 +22,12 @@
   )
 }}
 {% endblock navigate %}
+
+{% block footer %}
+{{
+  footer::footer( 
+  text="Plants first appeared on land about 460 million years ago",
+  class="footer"
+  )
+}}
+{% endblock footer %}
