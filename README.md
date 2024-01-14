@@ -1,8 +1,8 @@
 In the project the server and client parts of the web application are written in Rust (collected in one workspace).    
 The work is in progress.       
 It is to be an application for society of members interested in houseplants.    
-After registration and login members can read and write about different houseplants, add their own records about plants they care at home or are interested in.   
-Something like a mini blogs with focus on house plants. 
+After registration and login members can read and write about different houseplants, add their own records about houseplants they care at home or are interested in.   
+Something like a mini blogs with focus on houseplants. 
 
 I use [Actix](https://actix.rs/) Rust web framework for server and client parts,    
 [Tera Templates](https://keats.github.io/tera/docs/) for HTML responses formation,     
@@ -27,7 +27,7 @@ for clients side and
 houseplants_a
 ```     
 for server.      
-Create user 
+Create a user 
 ```
 truuser
 ```      
@@ -48,7 +48,7 @@ and
 ```
 client_modules
 ```   
-to populate the databases (change the placeholders path.to.file..... to real paths) run:      
+to populate the databases (change the placeholders path.to.file..... to real paths):      
 (find the files in ```server_modules```)     
 ```
 psql -U truuser -d houseplants_a < path.to.file_plants_and_members.sql
@@ -62,7 +62,7 @@ psql -U truuser -d houseplants_a < path.to.file_interesting_facts.sql
 psql -U truuser -d  < path.to.file_user.sql
 ``` 
 
-Create .env file (do not forget to gitignore it) in 
+Create .env file (and gitignore it) in 
 ```
 houseplants-client
 ```   
@@ -73,7 +73,7 @@ SERVER_PORT=127.0.0.1:3000
 DATABASE_URL=postgres://truuser:a_password@127.0.0.1:5432/web_client_db_a
 ```
 
-Create .env file (do not forget to gitignore it) in 
+Create .env file (and gitignore it) in 
 ```
 houseplants-server
 ```     
@@ -115,12 +115,13 @@ The routes the ```routes.rs``` files in ```houseplants-client```   and ```housep
 TODO: logout 
 TODO: better custom error handling   
 TODO: more views from DB     
-TODO: custom views for members 
+TODO: custom views for members   
 TODO: use middleware to secure custom views      
-TODO: possibility to add and view interesting facts about plants, which are randomly selected from DB   
+TODO: possibility to add and view interesting facts about plants
+TODO: a randomly selected from DB interesting fact is to appear at the footer when we navigate and views are changed    
 TODO: possibility for members to create new interesting facts       
 TODO: possibility for members to make comments  
-TODO: dockerize the app 
+TODO: dockerize the app     
 TODO: the app deployment   
-TODO: massive use of macros in templates 
+TODO: ..... 
 TODO: the work is in progress 
