@@ -52,7 +52,7 @@ pub fn plant_routes(config: &mut web::ServiceConfig) {
         .route(web::put().to(handle_update_plant)))
       .service(web::resource("delete/{member_id}/{plant_id}")
         .route(web::delete().to(handle_delete_plant)))
-        .service(web::resource("/get_all").route(web::get().to(show_plants)))
+        .service(web::resource("get_all").route(web::get().to(show_plants)))
   );
 }
 
@@ -68,11 +68,7 @@ pub fn member_routes(config: &mut web::ServiceConfig) {
 pub fn interesting_fact_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
     web::scope("/facts")
-//    .route("/", web::post().to(post_new_fact))
-    .route("/", web::get().to(show_interesting_facts))
-//    .route("/{member_id}", web::get().to(get_fact_details))
-//    .route("/{member_id}", web::delete().to(delete_fact))
-//    .route("/{member_id}", web::put().to(update_interesting_fact))
+      .service(web::resource("/")).route(web::get().to(show_interesting_facts))
   );
 }
 
