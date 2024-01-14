@@ -1,9 +1,9 @@
 \c houseplants_a postgres
 
-GRANT ALL ON SCHEMA public TO truuser;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO truuser;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to truuser;
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public to truuser;
+-- GRANT ALL ON SCHEMA public TO truuser;
+-- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO truuser;
+-- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to truuser;
+-- GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public to truuser;
 
 drop table if exists plant cascade;
 drop table if exists member cascade;
