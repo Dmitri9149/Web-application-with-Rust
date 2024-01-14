@@ -40,14 +40,14 @@
         <input type="password" name="confirmation" value="{{current_confirmation}}" id="confirmation" autocomplete="new-password"
             minlength="8" maxlength="12" required><br>
         <label for="name">Member name</label><br>
-        <input type="text" name="name" value="{{current_name}}" id="name" minlength="2" maxlength="10" required autocomplete="name"><br>
+        <input type="text" name="name" value="{{current_name}}" id="name" minlength="2" maxlength="10" required ><br>
         <label for="info">Brief member info</label><br>
         <input type="text" name="info" value="{{current_info}}" id="info" maxlength="40" autocomplete="info"><br>
         <label for="error">
             <p style="color:red">{{error}}</p>
         </label>
         <br>
-        <button type=submit id="button2">Register</button>
+        <button type=submit class="button1">Register</button>
     </form>
   </div>
 {% endblock form %}
