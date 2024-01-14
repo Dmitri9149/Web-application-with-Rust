@@ -32,7 +32,7 @@ pub fn authorization_routes(config: &mut web::ServiceConfig) {
     .service(web::resource("/").route(web::get().to(show_register_form)))
     .service(web::resource("/signinform").route(web::get().to(show_signin_form)))
     .service(web::resource("/signin").route(web::post().to(handle_signin)))
-    .service(web::resource("/register").route(web::get().to(handle_register_redirect)))
+//    .service(web::resource("/register").route(web::get().to(handle_register_redirect)))
     .service(web::resource("/register").route(web::post().to(handle_register)))
   );
 }
@@ -68,7 +68,7 @@ pub fn member_routes(config: &mut web::ServiceConfig) {
 pub fn interesting_fact_routes(cfg: &mut web::ServiceConfig) {
   cfg.service(
     web::scope("/facts")
-      .service(web::resource("/")).route(web::get().to(show_interesting_facts))
+      .service(web::resource("/").route(web::get().to(show_interesting_facts)))
   );
 }
 
