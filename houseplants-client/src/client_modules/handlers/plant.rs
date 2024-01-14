@@ -63,7 +63,7 @@ pub async fn new_plant_addition(
   } else {
     let s = tmpl
     .render("new_plant_form/new_plant.html", &ctx)
-    .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
+    .map_err(|_| CustomError::TeraError("Template error, user was not found in DB".to_string()))?;
     Ok(HttpResponse::Ok().content_type("text/html").body(s))
   }
 }
