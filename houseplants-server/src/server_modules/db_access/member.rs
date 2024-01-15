@@ -74,10 +74,10 @@ pub async fn delete_member_db(pool: &PgPool, member_id: i32) ->
 pub async fn update_member_details_db (
   pool: &PgPool,
   member_id: i32,
-  change_member: UpdateMember,
+  update_member: UpdateMember,
 ) -> Member {
   // Retrieve current member from DB
-  let member = sqlx::query!(
+  let current_member = sqlx::query!(
     "SELECT member_id, member_name, member_info 
     FROM member 
     WHERE member_id = $1", member_id
@@ -86,18 +86,16 @@ pub async fn update_member_details_db (
   .await
   .unwrap();
 
-    let new_member = Member {
-      member_id: member.member_id, 
-      member_name: if let Some(name) = change_member.member_name {
-        name 
-      } else {
-        member.member_name
-      },
-      member_info: if let Some(info) = change_member.member_info {
-        info
-      } else {
-        member.member_info
-      }
+  let new_member = Member {
+    member_id: current_member.member_id,
+    member_name: match update_member.member_name {
+      Some (name) => name, 
+      None => current_member.member_name
+    }, 
+      member_info: match update_member.member_info {
+        Some(info) => info, 
+        None => current_member.member_info
+      } 
     };
 
     // Prepare SQL update statement
