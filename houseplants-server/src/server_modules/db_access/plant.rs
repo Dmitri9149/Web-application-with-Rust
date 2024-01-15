@@ -92,39 +92,34 @@ pub async fn update_plant_details_db (
     .await
     .unwrap();
 
-    // Construct the parameters for update: 
-    let name: String = if let Some(name) = update_plant.plant_name {
-        name 
-    } else {current_plant.plant_name};
-    let care: String = if let Some(care) = update_plant.plant_care {
-        care
-    } else {
-        current_plant.plant_care.unwrap_or_default()
+    // Construct the update: 
+    let name = match update_plant.plant_name {
+        Some(name) => name,
+        None => current_plant.plant_name
     };
-    let care_difficulty: String = if let Some(care_difficulty) = update_plant.plant_care_difficulty {
-        care_difficulty
-    } else {
-        current_plant.plant_care_difficulty.unwrap_or_default()
+    let care = match update_plant.plant_care {
+        Some(care) => care,
+        None => current_plant.plant_care.unwrap_or_default()
     };
-    let alternative_name: String = if let Some(alternative_name) = update_plant.plant_alternative_name {
-        alternative_name
-    } else {
-        current_plant.plant_alternative_name.unwrap_or_default()
+    let care_difficulty = match update_plant.plant_care_difficulty {
+        Some(care_difficulty) => care_difficulty,
+        None => current_plant.plant_care_difficulty.unwrap_or_default() 
     };
-    let extra_info: String = if let Some(extra_info) = update_plant.plant_extra_info {
-        extra_info
-    } else {
-        current_plant.plant_extra_info.unwrap_or_default()
+    let alternative_name = match update_plant.plant_alternative_name {
+        Some(alternative_name) => alternative_name,
+        None => current_plant.plant_alternative_name.unwrap_or_default()
     };
-    let price = if let Some(price) = update_plant.plant_price {
-        price
-    } else {
-        current_plant.plant_price.unwrap_or_default()
+    let extra_info = match update_plant.plant_extra_info {
+        Some(extra_info) => extra_info,
+        None => current_plant.plant_extra_info.unwrap_or_default()
     };
-    let description: String = if let Some(description) = update_plant.plant_description {
-        description
-    } else {
-        current_plant.plant_description.unwrap_or_default()
+    let price = match update_plant.plant_price {
+        Some(price) => price, 
+        None => current_plant.plant_price.unwrap_or_default()
+    };
+    let description = match update_plant.plant_description {
+        Some(price) => price, 
+        None => current_plant.plant_description.unwrap_or_default() 
     };
 
     // Prepare SQL statement 
