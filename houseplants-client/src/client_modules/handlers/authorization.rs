@@ -115,41 +115,47 @@ pub async fn handle_signin(
   let username = params.username.clone();
   let user = get_user_db(&app_state.db, 
     username.to_string()).await;
-  if let Ok(user) = user {
-    let does_password_match = argon2::verify_encoded(
-      &user.user_password.trim(),
-      params.password.clone().as_bytes()
-    ).unwrap();
 
-    if !does_password_match {
-      ctx.insert("error", "Invalid login");
-      ctx.insert("current_name", &params.username);
-      ctx.insert("current_password", &params.password);
-      s = tmpl
-            .render("signin_form/signin.html", &ctx)
-            .map_err(|_| CustomError::TeraError(
-              "Template error".to_string()))?;
-    } else {
-      ctx.insert("name", &params.username);
-      ctx.insert("title", &"Signin confirmation !".to_owned());
-      ctx.insert(
-        "message",
-        &"You have successfully logged in to HousePlants!".to_owned()
-      );
-      s = tmpl
-            .render("user/user.html", &ctx)
-            .map_err(|_| CustomError::TeraError(
-              "Template error".to_string()))?;
+    match user {
+      Ok(user) => {
+        let does_password_match = argon2::verify_encoded(
+          &user.user_password.trim(),
+          params.password.clone().as_bytes()
+        ).unwrap();
+        match !does_password_match {
+          true => {
+            ctx.insert("error", "Invalid login");
+            ctx.insert("current_name", &params.username);
+            ctx.insert("current_password", &params.password);
+            s = tmpl
+                  .render("signin_form/signin.html", &ctx)
+                  .map_err(|_| CustomError::TeraError(
+                    "Template error".to_string()))?;
+          },
+          false => {
+            ctx.insert("name", &params.username);
+            ctx.insert("title", &"Signin confirmation !".to_owned());
+            ctx.insert(
+              "message",
+              &"You have successfully logged in to HousePlants!".to_owned()
+            );
+            s = tmpl
+                  .render("user/user.html", &ctx)
+                  .map_err(|_| CustomError::TeraError(
+                    "Template error".to_string()))?;
+          }
+        }
+      },
+      Err(_) => {
+        ctx.insert("error", "User id not found");
+        ctx.insert("current_name", &params.username);
+        ctx.insert("current_password", &params.password);
+        s = tmpl 
+              .render("signin_form/signin.html", &ctx)
+              .map_err(|_| CustomError::TeraError(
+                "Template error".to_string()))?;
+      }
     }
-  } else {
-    ctx.insert("error", "User id not found");
-    ctx.insert("current_name", &params.username);
-    ctx.insert("current_password", &params.password);
-    s = tmpl 
-          .render("signin_form/signin.html", &ctx)
-          .map_err(|_| CustomError::TeraError(
-            "Template error".to_string()))?;
-  };
   Ok(HttpResponse::Ok().content_type("text/html").body(s))
 }
 
