@@ -28,7 +28,7 @@ create table member(
     member_info varchar(200) not null
 );
 
-/* Load seed data */ 
+/*
 insert into member(member_id, member_name, member_info)
 values(1,'Dmitri', 'Likes orchids');
 
@@ -67,6 +67,7 @@ insert into plant
 values(3, 2, 'Crassula ovata', 'Very interesting and very popular house plant' , '2023-04-12 05:42:50',
 'a succulent plant with small pink or white flowers that is native to the KwaZulu-Natal and Eastern Cape provinces of South Africa', 'Be careful with watering', 'Easy', 
 'Jade plant, Money plant', 0);
+*/ 
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO truuser;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to truuser;
