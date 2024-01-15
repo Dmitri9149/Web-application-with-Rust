@@ -33,7 +33,7 @@ pub async fn new_plant_addition(
 ) -> Result<HttpResponse, Error> {
 
   let resource_url = format!("http://{}/plants/", get_server_port());
-  let mut ctx = tera::Context::new();
+  let ctx = tera::Context::new();
   let username = params.user_name.clone();
   let user = get_user_db(&app_state.db, 
     username.to_string()).await;
