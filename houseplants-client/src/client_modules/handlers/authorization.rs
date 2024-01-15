@@ -3,9 +3,8 @@ use crate::errors::CustomError;
 use crate::client_modules::state::AppState;
 use crate::model::{MemberRegisterForm, MemberResponse, User, MemberSigninForm};
 use actix_web::{web, Error, HttpResponse, Result};
-use argon2::{self, Config};
 use serde_json::json;
-use crate::helpers::{get_server_port};
+use crate::helpers::{get_server_port, hash_password};
 
 // show form for member registration 
 pub async fn show_register_form(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
@@ -81,16 +80,10 @@ pub async fn handle_register(
                 member_response.member_id
               );
         
-              // Hashing the password to store it in DB 
-              let salt = b"random_salt";
-              let config = Config::default();
-              let hash = argon2::hash_encoded(
-                params.password.clone().as_bytes(), salt, &config)
-                .unwrap();
               let user = User {
                 username,
                 member_id: Some(member_response.member_id),
-                user_password: hash,
+                user_password: hash_password("random_salt", &params.password)
               };
               let _member_created = post_new_user_db(&app_state.db, user).await?;
         }
