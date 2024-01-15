@@ -1,5 +1,4 @@
 use crate::db_access::interesting_fact::*;
-use crate::server_modules::model::interesting_fact::*;
 use crate::state::AppState;
 use actix_web::{web, HttpResponse};
 
