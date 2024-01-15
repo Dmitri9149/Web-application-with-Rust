@@ -1,8 +1,6 @@
-use crate::model::{NewFact, NewFactResponse};
-use crate::state::AppState;
+use crate::model::{NewFactResponse};
 use actix_web::{web, Error, HttpResponse, Result};
 use crate::errors::CustomError;
-use serde_json::json;
 use crate::helpers::{get_server_port};
 
 // view list of all plant records in House Plants 
