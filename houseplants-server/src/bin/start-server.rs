@@ -1,8 +1,5 @@
 use actix_web::{web, App, HttpServer};
-use dotenv::dotenv;
 use sqlx::postgres::PgPool;
-use std::env;
-use std::io;
 use state::AppState;
 
 #[path = "../server_modules/mod.rs"]
