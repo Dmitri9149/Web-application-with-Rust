@@ -1,6 +1,4 @@
 use actix_web::{web, HttpResponse};
-use crate::state::AppState;
-use std::time::{SystemTime, UNIX_EPOCH};
 
 // handlers to 'home' scope 
 
