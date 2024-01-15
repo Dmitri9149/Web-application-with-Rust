@@ -1,14 +1,15 @@
 In the project the server and client parts of the web application are written in Rust (collected in one workspace).    
 The work is in progress.       
 It is to be an application for society of members interested in houseplants.    
-After registration and login members can read and write about different houseplants, add their own records about houseplants they care at home or are interested in.   
+After registration and login members can read and write about different houseplants, add their own records about houseplants they care at home or are interested in, make comments, add interesting facts about (house)plants.    
 Something like a mini blogs with focus on houseplants. 
 
 I use [Actix](https://actix.rs/) Rust web framework for server and client parts,    
 [Tera Templates](https://keats.github.io/tera/docs/) for HTML responses formation,     
 [PostgreSQL](https://www.postgresql.org/) as database. 
 
-In general,  I follow the approach from the very good books: [The Rust Programming Language; Final Project: Building a Multithreaded Web Server](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html) and    
+In general,  I follow the approach from the very good books: [The Rust Programming Language; Final Project: Building a Multithreaded Web Server](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html)     
+and    
 [Prabhu Eshwarla, Rust Servers, Services, and Apps](https://www.manning.com/books/rust-servers-services-and-apps),      
 [Prabhu Eshwarla, Rust Servers, Services, and Apps, GitHub code of the book](https://github.com/peshwar9/rust-servers-services-apps)
 
@@ -48,7 +49,7 @@ and
 ```
 client_modules
 ```   
-to populate the databases (change the placeholders path.to.file..... to real paths):      
+to create tables for the databases (change the placeholders path.to.file..... to real paths):      
 (find the files in ```server_modules```)     
 ```
 psql -U truuser -d houseplants_a < path.to.file_plants_and_members.sql
@@ -60,8 +61,7 @@ psql -U truuser -d houseplants_a < path.to.file_interesting_facts.sql
 
 ```
 psql -U truuser -d  < path.to.file_user.sql
-``` 
-
+```     
 Create .env file (and gitignore it) in 
 ```
 houseplants-client
@@ -106,11 +106,13 @@ localhost:8080/home/
 ```    
 and    
 ```
-localhost:3000/home
+localhost:3000/home/
 ```    
 
 The client interface allow at the moment to navigate between (almost all) pages.    
-The routes the ```routes.rs``` files in ```houseplants-client```   and ```houseplants-server``` define the routes/functionality of the app resources.    
+Register with 'username' , 'password', 'member_name' and add some records for 
+the houseplants.  
+The routes in the ```routes.rs``` files in ```houseplants-client```   and ```houseplants-server``` define the routes/functionality of the app resources.    
 
 TODO: logout 
 TODO: better custom error handling   
@@ -122,6 +124,7 @@ TODO: a randomly selected from DB interesting fact is to appear at the footer wh
 TODO: possibility for members to create new interesting facts       
 TODO: possibility for members to make comments  
 TODO: dockerize the app     
-TODO: the app deployment   
-TODO: ..... 
+TODO: the app deployment  
+TODO: create schema for the DB(s)     
+TODO: .....     
 TODO: the work is in progress 
