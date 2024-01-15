@@ -53,9 +53,7 @@ pub async fn new_plant_addition(
       });
 //      let member_id = user.member_id.unwrap();
       let awc_client = awc::Client::default();
-      let res = awc_client
-                  .post(resource_url)
-                  .send_json(&new_plant)
+      let res = awc_client.post(resource_url).send_json(&new_plant)
                   .await
                   .unwrap()
                   .body()
@@ -95,16 +93,12 @@ pub async fn handle_insert_plant(
     "plant_price": &params.plant_price,
     "plant_extra_info": &params.plant_extra_info
   });
-  println!("New plant {:?}", new_plant);
   let awc_client = awc::Client::default();
-  let res = awc_client
-              .post(resource_url)
-              .send_json(&new_plant)
+  let res = awc_client.post(resource_url).send_json(&new_plant)
               .await
               .unwrap()
               .body()
               .await?;
-
   println!("Finished call: {:?}", res);
   let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
   Ok(HttpResponse::Ok().json(plant_response))
@@ -144,9 +138,7 @@ pub async fn handle_update_plant(
   });
   let awc_client = awc::Client::default();
   let update_url = format!("http://{}/plants/{}/{}", get_server_port(), member_id, plant_id);
-  let res = awc_client
-              .put(update_url)
-              .send_json(&update_plant)
+  let res = awc_client.put(update_url).send_json(&update_plant)
               .await
               .unwrap()
               .body()
@@ -165,9 +157,7 @@ pub async fn show_plant_for_member(
   let (member_id, plant_id) = path.into_inner();
   let awc_client = awc::Client::default();
   let member_plant_url = format!("http://{}/plants/{}/{}", get_server_port(), member_id, plant_id);
-  let res = awc_client
-              .get(member_plant_url)
-              .send()
+  let res = awc_client.get(member_plant_url).send()
               .await
               .unwrap()
               .body()
@@ -186,9 +176,7 @@ pub async fn show_plant_for_member_render_template(
   let (member_id, plant_id) = path.into_inner();
   let awc_client = awc::Client::default();
   let member_plant_url = format!("http://{}/plants/{}/{}", get_server_port(), member_id, plant_id);
-  let res = awc_client
-              .get(member_plant_url)
-              .send()
+  let res = awc_client.get(member_plant_url).send()
               .await
               .unwrap()
               .body()
@@ -215,9 +203,7 @@ pub async fn show_plants(
 ) -> Result<HttpResponse, Error> {
   let awc_client = awc::Client::default();
   let plants_url = format!("http://{}/plants/", get_server_port());
-  let res = awc_client
-              .get(plants_url)
-              .send()
+  let res = awc_client.get(plants_url).send()
               .await
               .unwrap()
               .body()
