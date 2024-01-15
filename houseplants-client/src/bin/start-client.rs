@@ -1,6 +1,5 @@
 use actix_web::{web, App, HttpServer};
 use actix_web::web::Data;
-use dotenv::dotenv;
 use sqlx::postgres::PgPool;
 use std::env;
 use tera::Tera;
