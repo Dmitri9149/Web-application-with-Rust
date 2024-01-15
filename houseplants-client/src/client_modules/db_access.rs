@@ -15,11 +15,11 @@ pub async fn get_user_db(pool: &PgPool, username: String) ->
   .await
   .unwrap();
 
-  if let Some(user) = result {
-    Ok(user)
-  } else {
-    Err(CustomError::NotFound("Username not found".into()))
+  match result {
+    Some(user) => Ok(user),
+    None => Err(CustomError::NotFound("Username not found".into()))
   }
+
 }
 
 pub async fn post_new_user_db(pool: &PgPool, new_user: User) -> 
