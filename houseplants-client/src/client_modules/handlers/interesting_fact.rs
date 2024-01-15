@@ -3,7 +3,7 @@ use actix_web::{web, Error, HttpResponse, Result};
 use crate::errors::CustomError;
 use crate::helpers::{get_server_port};
 
-// view list of all plant records in House Plants 
+// view list of interesting facts about (house) plants saved in DB 
 // Tera template is used for handling the view 
 pub async fn show_interesting_facts(
   tmpl: web::Data<tera::Tera>,
