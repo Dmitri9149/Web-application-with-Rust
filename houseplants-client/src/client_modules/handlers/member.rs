@@ -1,5 +1,5 @@
 use crate::db_access::{get_user_db, post_new_user_db};
-use crate::model::{MemberRegisterForm, MemberResponse, User, MemberSigninForm};
+use crate::model::{MemberResponse};
 use crate::state::AppState;
 use actix_web::{web, Error, HttpResponse, Result};
 use crate::errors::CustomError;
