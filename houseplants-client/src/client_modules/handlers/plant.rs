@@ -11,7 +11,7 @@ use crate::helpers::{get_server_port};
 pub async fn show_new_plant_form(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
   let mut ctx = tera::Context::new();
   ctx.insert("error", "");
-  ctx.insert("current_member_name", "");
+  ctx.insert("current_user_name", "");
   ctx.insert("current_plant_name", "");
   ctx.insert("current_plant_description", "");
   ctx.insert("current_plant_care", "");
@@ -34,12 +34,12 @@ pub async fn new_plant_addition(
 
   let resource_url = format!("http://{}/plants/", get_server_port());
   let mut ctx = tera::Context::new();
-  let username = params.member_name.clone();
+  let username = params.user_name.clone();
   let user = get_user_db(&app_state.db, 
     username.to_string()).await;
 
   match user {
-    // get member_id from DB for the user with 'member_name'
+    // get member_id from DB for the user with 'user_name'
     Ok(user) => {
       let new_plant = json!({
         "member_id": user.member_id, 
@@ -51,7 +51,7 @@ pub async fn new_plant_addition(
         "plant_price": &params.plant_price,
         "plant_extra_info": &params.plant_extra_info,
       });
-      let member_id = user.member_id.unwrap();
+//      let member_id = user.member_id.unwrap();
       let awc_client = awc::Client::default();
       let res = awc_client
                   .post(resource_url)
