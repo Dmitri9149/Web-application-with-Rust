@@ -48,8 +48,10 @@ pub async fn handle_register(
   let user = get_user_db(&app_state.db, username.to_string()).await;
 
   match user {
-    Ok(user) => {
+    // the username is new , can not find user with the username in DB 
+    Err(_) => {
       match params.password != params.confirmation {
+        // password and password confirmation do not match 
         true => {
                   ctx.insert("error", "Passwords do not match");
                   ctx.insert("current_username", &params.username);
@@ -61,7 +63,7 @@ pub async fn handle_register(
                         .render("register_form/register.html", &ctx)
                         .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
         },
-
+        // password and password confirmation match 
         false => {
               let new_member = json!({
                 "member_name": &params.name,
@@ -89,7 +91,8 @@ pub async fn handle_register(
         }
       }
     },
-    Err(_) => {
+    // user with the username was already registered, we find the username in DB 
+    Ok(_) => {
           ctx.insert("error", "User Id already exists");
           ctx.insert("current_username", &params.username);
           ctx.insert("current_password", "");
@@ -117,12 +120,14 @@ pub async fn handle_signin(
     username.to_string()).await;
 
     match user {
+      // user with the username exists in DB 
       Ok(user) => {
         let does_password_match = argon2::verify_encoded(
           &user.user_password.trim(),
           params.password.clone().as_bytes()
         ).unwrap();
         match !does_password_match {
+          // wrong password
           true => {
             ctx.insert("error", "Invalid login");
             ctx.insert("current_name", &params.username);
@@ -132,6 +137,7 @@ pub async fn handle_signin(
                   .map_err(|_| CustomError::TeraError(
                     "Template error".to_string()))?;
           },
+          // password is OK 
           false => {
             ctx.insert("name", &params.username);
             ctx.insert("title", &"Signin confirmation !".to_owned());
@@ -146,6 +152,7 @@ pub async fn handle_signin(
           }
         }
       },
+      // can not find user with the username in DB 
       Err(_) => {
         ctx.insert("error", "User id not found");
         ctx.insert("current_name", &params.username);
