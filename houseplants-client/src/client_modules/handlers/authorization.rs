@@ -37,7 +37,7 @@ Result<HttpResponse, Error> {
   Ok(HttpResponse::Ok().content_type("text.html").body(s))
 }
 
-// register a new member or signing of already existed member
+// register a new member 
 pub async fn handle_register(
   tmpl: web::Data<tera::Tera>,
   app_state: web::Data<AppState>,
@@ -47,65 +47,67 @@ pub async fn handle_register(
   let s;
   let username = params.username.clone();
   let user = get_user_db(&app_state.db, username.to_string()).await;
-  let user_not_found: bool = user.is_err();
 
-  // If user is not found in database, proceed to verification of passwords
-  if user_not_found {
-    if params.password != params.confirmation {
-      ctx.insert("error", "Passwords do not match");
-      ctx.insert("current_username", &params.username);
-      ctx.insert("current_password", "");
-      ctx.insert("current_confirmation", "");
-      ctx.insert("current_name", &params.name);
-      ctx.insert("current_info", &params.info);
-      s = tmpl
-            .render("register_form/register.html", &ctx)
-            .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
-    } else {
-      let new_member = json!({
-        "member_name": &params.name,
-        "member_info": &params.info
-      });
-      let awc_client = awc::Client::default();
-      let resource_url = format!("http://{}/members/", get_server_port());
-      let result = awc_client
-                  .post(resource_url)
-                  .send_json(&new_member)
-                  .await
-                  .unwrap()
-                  .body()
-                  .await?;
-      let member_response: MemberResponse = serde_json::from_str(&std::str::from_utf8(&result)?)?;
-      s = format!(
-        "Congratulations. You have been successfully registered as member of HousePlants and your member id is: {}. To start using HousePlant, please login with your credentials.", 
-        member_response.member_id
-      );
+  match user.is_err() {
+    true => {
+      match params.password != params.confirmation {
+        true => {
+                  ctx.insert("error", "Passwords do not match");
+                  ctx.insert("current_username", &params.username);
+                  ctx.insert("current_password", "");
+                  ctx.insert("current_confirmation", "");
+                  ctx.insert("current_name", &params.name);
+                  ctx.insert("current_info", &params.info);
+                  s = tmpl
+                        .render("register_form/register.html", &ctx)
+                        .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
+        },
 
-      // Hashing the password to store it in DB 
-      let salt = b"random_salt";
-      let config = Config::default();
-      let hash = argon2::hash_encoded(
-        params.password.clone().as_bytes(),
-        salt,
-        &config).unwrap();
-      let user = User {
-        username,
-        member_id: Some(member_response.member_id),
-        user_password: hash,
-      };
-      let _member_created = post_new_user_db(&app_state.db, user).await?;
+        _ => {
+              let new_member = json!({
+                "member_name": &params.name,
+                "member_info": &params.info
+              });
+              let awc_client = awc::Client::default();
+              let resource_url = format!("http://{}/members/", get_server_port());
+              let result = awc_client.post(resource_url).send_json(&new_member)
+                          .await
+                          .unwrap()
+                          .body()
+                          .await?;
+              let member_response: MemberResponse = serde_json::from_str(&std::str::from_utf8(&result)?)?;
+              s = format!(
+                "Congratulations. You have been successfully registered as member of HousePlants and your member id is: {}. To start using HousePlant, please login with your credentials.", 
+                member_response.member_id
+              );
+        
+              // Hashing the password to store it in DB 
+              let salt = b"random_salt";
+              let config = Config::default();
+              let hash = argon2::hash_encoded(
+                params.password.clone().as_bytes(), salt, &config)
+                .unwrap();
+              let user = User {
+                username,
+                member_id: Some(member_response.member_id),
+                user_password: hash,
+              };
+              let _member_created = post_new_user_db(&app_state.db, user).await?;
+        }
+      }
+    },
+    _ => {
+          ctx.insert("error", "User Id already exists");
+          ctx.insert("current_username", &params.username);
+          ctx.insert("current_password", "");
+          ctx.insert("current_confirmation", "");
+          ctx.insert("current_name", &params.name);
+          ctx.insert("current_info", &params.info);
+          s = tmpl
+              .render("register_form/register.html", &ctx)
+              .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
     }
-  } else {
-      ctx.insert("error", "User Id already exists");
-      ctx.insert("current_username", &params.username);
-      ctx.insert("current_password", "");
-      ctx.insert("current_confirmation", "");
-      ctx.insert("current_name", &params.name);
-      ctx.insert("current_info", &params.info);
-      s = tmpl
-          .render("register_form/register.html", &ctx)
-          .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
-    };
+}
     Ok(HttpResponse::Ok().content_type("text/html").body(s))
  }
 
