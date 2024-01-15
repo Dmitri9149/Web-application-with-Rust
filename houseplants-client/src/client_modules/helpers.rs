@@ -34,7 +34,7 @@ pub fn hash_password(salt: &str, password: &str) -> String {
   let s = salt.as_bytes();
   let config = Config::default();
   argon2::hash_encoded(
-    password.clone().as_bytes(), s, &config)
+    password.as_bytes(), s, &config)
     .unwrap()
 }
 
