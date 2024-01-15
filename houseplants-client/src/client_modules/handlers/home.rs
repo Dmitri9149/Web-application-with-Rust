@@ -1,5 +1,4 @@
-use actix_web::{get, web, Error, App, HttpServer, HttpResponse};
-use crate::state::AppState;
+use actix_web::{web, Error, HttpResponse};
 use crate::errors::CustomError;
 
 // handlers to 'home' scope 
