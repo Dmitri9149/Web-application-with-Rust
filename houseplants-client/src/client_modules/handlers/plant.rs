@@ -37,34 +37,40 @@ pub async fn new_plant_addition(
   let username = params.member_name.clone();
   let user = get_user_db(&app_state.db, 
     username.to_string()).await;
-  if let Ok(user) = user {
-    let new_plant = json!({
-      "member_id": user.member_id, 
-      "plant_name": &params.plant_name,
-      "plant_description": &params.plant_description,
-      "plant_care": &params.plant_care,
-      "plant_alternative_name": &params.plant_alternative_name,
-      "plant_care_difficulty": &params.plant_care_difficulty,
-      "plant_price": &params.plant_price,
-      "plant_extra_info": &params.plant_extra_info,
-    });
-    let member_id = user.member_id.unwrap();
-    let awc_client = awc::Client::default();
-    let res = awc_client
-                .post(resource_url)
-                .send_json(&new_plant)
-                .await
-                .unwrap()
-                .body()
-                .await?;
-    println!("Finished call from DB with new plant as result: {:?}", res);
-    let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
-    Ok(HttpResponse::Ok().json(plant_response))
-  } else {
-    let s = tmpl
-    .render("new_plant_form/new_plant.html", &ctx)
-    .map_err(|_| CustomError::TeraError("Template error, user was not found in DB".to_string()))?;
-    Ok(HttpResponse::Ok().content_type("text/html").body(s))
+
+  match user {
+    // get member_id from DB for the user with 'member_name'
+    Ok(user) => {
+      let new_plant = json!({
+        "member_id": user.member_id, 
+        "plant_name": &params.plant_name,
+        "plant_description": &params.plant_description,
+        "plant_care": &params.plant_care,
+        "plant_alternative_name": &params.plant_alternative_name,
+        "plant_care_difficulty": &params.plant_care_difficulty,
+        "plant_price": &params.plant_price,
+        "plant_extra_info": &params.plant_extra_info,
+      });
+      let member_id = user.member_id.unwrap();
+      let awc_client = awc::Client::default();
+      let res = awc_client
+                  .post(resource_url)
+                  .send_json(&new_plant)
+                  .await
+                  .unwrap()
+                  .body()
+                  .await?;
+      println!("Finished call from DB with new plant as result: {:?}", res);
+      let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+      Ok(HttpResponse::Ok().json(plant_response))
+    },
+    // can not find member with the member_name 
+    Err(_) => {
+      let s = tmpl
+      .render("new_plant_form/new_plant.html", &ctx)
+      .map_err(|_| CustomError::TeraError("Template error, user was not found in DB".to_string()))?;
+      Ok(HttpResponse::Ok().content_type("text/html").body(s))
+    }
   }
 }
 
