@@ -42,7 +42,6 @@ pub async fn get_member_details_db(pool: &PgPool, member_id: i32) ->
   }
 }
 
-
 pub async fn post_new_member_db(pool: &PgPool, new_member: NewMember) -> 
   Member {
     let member_row = sqlx::query!(
