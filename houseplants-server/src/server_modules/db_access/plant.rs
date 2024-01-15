@@ -1,6 +1,5 @@
 use crate::server_modules::model::plant::*;
 use sqlx::postgres::PgPool;
-use std::error::Error;
 
 // get all plants (records) created by a member  
 pub async fn get_plants_for_member_db(

@@ -1,6 +1,5 @@
 use crate::server_modules::model::member::{Member, NewMember, UpdateMember};
 use sqlx::postgres::PgPool;
-use std::error::Error;
 
 // get records of all members of the app 
 pub async fn get_members_db(pool: &PgPool) -> Vec<Member> {
