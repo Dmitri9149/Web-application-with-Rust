@@ -20,7 +20,7 @@ async fn main() -> std::io::Result<()> {
   println!("Listening on: {}", &port);
 
   // get client's db_url and db_pool
-  let db_url = helpers::get_db_url_server();
+  let db_url = helpers::get_db_url();
   let db_pool = PgPool::connect(&db_url).await.unwrap();
 
   let shared_data = web::Data::new(AppState {
