@@ -123,8 +123,7 @@ TODO: possibility to add and view interesting facts about plants
 TODO: a randomly selected from DB interesting fact is to appear at the footer when we navigate and views are changed    
 TODO: possibility for members to create new interesting facts       
 TODO: possibility for members to make comments  
-TODO: dockerize the app     
-TODO: the app deployment  
+TODO: dockerize the app      
 TODO: create schema for the DB(s)     
 TODO: .....     
 TODO: the work is in progress 
