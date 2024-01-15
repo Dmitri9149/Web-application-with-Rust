@@ -10,9 +10,7 @@ pub async fn show_interesting_facts(
 ) -> Result<HttpResponse, Error> {
   let awc_client = awc::Client::default();
   let facts_url = format!("http://{}/facts/", get_server_port());
-  let res = awc_client
-              .get(facts_url)
-              .send()
+  let res = awc_client.get(facts_url).send()
               .await
               .unwrap()
               .body()
