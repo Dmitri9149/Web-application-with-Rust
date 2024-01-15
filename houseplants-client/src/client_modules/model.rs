@@ -125,7 +125,7 @@ impl From<web::Json<UpdatePlantResponse>> for UpdatePlantResponse {
 // Struct to handle plants records from form
 #[derive(Serialize, Deserialize, Debug)]
 pub struct NewPlantForm {
-    pub member_name: String,
+    pub user_name: String,
     pub plant_name: String,
     pub plant_description: String,
     pub plant_care: String,
