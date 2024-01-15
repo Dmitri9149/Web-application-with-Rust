@@ -37,7 +37,7 @@ values(2,'Alice', 'Likes succulents');
 
 insert into plant
 (
-    plant_id,member_id, plant_name, plant_extra_info, posted_time, 
+    plant_id, member_id, plant_name, plant_extra_info, posted_time, 
     plant_description, plant_care, plant_care_difficulty, 
     plant_alternative_name, plant_price 
 
