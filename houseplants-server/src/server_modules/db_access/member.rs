@@ -99,7 +99,7 @@ pub async fn update_member_details_db (
     };
 
     // Prepare SQL update statement
-    let member_updated = sqlx::query!(
+    let _member_updated = sqlx::query!(
       "UPDATE member 
        SET member_name = $1, member_info = $2 
        WHERE member_id = $3
