@@ -39,7 +39,7 @@ pub async fn new_plant_addition(
     username.to_string()).await;
 
   match user {
-    // get member_id from DB for the user with 'user_name'
+    // if the user with the 'user_name' was found in DB 
     Ok(user) => {
       let new_plant = json!({
         "member_id": user.member_id, 
@@ -51,7 +51,6 @@ pub async fn new_plant_addition(
         "plant_price": &params.plant_price,
         "plant_extra_info": &params.plant_extra_info,
       });
-//      let member_id = user.member_id.unwrap();
       let awc_client = awc::Client::default();
       let res = awc_client.post(resource_url).send_json(&new_plant)
                   .await
@@ -62,7 +61,7 @@ pub async fn new_plant_addition(
       let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
       Ok(HttpResponse::Ok().json(plant_response))
     },
-    // can not find member with the member_name 
+    // if we can not find user with the 'user_name' in DB 
     Err(_) => {
       let s = tmpl
       .render("new_plant_form/new_plant.html", &ctx)
