@@ -47,8 +47,8 @@ pub async fn handle_register(
   let username = params.username.clone();
   let user = get_user_db(&app_state.db, username.to_string()).await;
 
-  match user.is_err() {
-    true => {
+  match user {
+    Ok(user) => {
       match params.password != params.confirmation {
         true => {
                   ctx.insert("error", "Passwords do not match");
@@ -62,7 +62,7 @@ pub async fn handle_register(
                         .map_err(|_| CustomError::TeraError("Template error".to_string()))?;
         },
 
-        _ => {
+        false => {
               let new_member = json!({
                 "member_name": &params.name,
                 "member_info": &params.info
@@ -89,7 +89,7 @@ pub async fn handle_register(
         }
       }
     },
-    _ => {
+    Err(_) => {
           ctx.insert("error", "User Id already exists");
           ctx.insert("current_username", &params.username);
           ctx.insert("current_password", "");
