@@ -1,12 +1,10 @@
 use actix_web::{get, web, Error, App, HttpServer, HttpResponse};
 use crate::state::AppState;
-use std::time::{SystemTime, UNIX_EPOCH};
 use crate::errors::CustomError;
 
 // handlers to 'home' scope 
 
 pub async fn index(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
-//    HttpResponse::Ok().json("Hello World!")
     let ctx = tera::Context::new();
     let s = tmpl
         .render("home/home.html", &ctx)

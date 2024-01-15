@@ -1,4 +1,4 @@
-use crate::db_access::{get_user_db, post_new_user_db};
+use crate::db_access::{get_user_db};
 use crate::model::{NewPlant, NewPlantResponse, 
   UpdatePlant, UpdatePlantResponse, NewPlantForm};
 use crate::state::AppState;
