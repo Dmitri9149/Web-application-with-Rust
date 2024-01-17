@@ -2,34 +2,29 @@ use crate::errors::CustomError;
 use crate::model::*;
 use sqlx::postgres::PgPool;
 
-//Query user record from DB 
-pub async fn get_user_db(pool: &PgPool, username: String) -> 
-  Result<User, CustomError> {
-  // Prepare SQL statement
-  let result = sqlx::query_as!(
-    User,
-    "SELECT * FROM web_user WHERE username = $1",
-    username  
-  )
-  .fetch_optional(pool)
-  .await
-  .unwrap();
+//Query user record from DB
+pub async fn get_user_db(pool: &PgPool, username: String) -> Result<User, CustomError> {
+    // Prepare SQL statement
+    let result = sqlx::query_as!(User, "SELECT * FROM web_user WHERE username = $1", username)
+        .fetch_optional(pool)
+        .await
+        .unwrap();
 
-  match result {
-    Some(user) => Ok(user),
-    None => Err(CustomError::NotFound("Username not found".into()))
-  }
-
+    match result {
+        Some(user) => Ok(user),
+        None => Err(CustomError::NotFound("Username not found".into())),
+    }
 }
 
-pub async fn post_new_user_db(pool: &PgPool, new_user: User) -> 
-  Result<User, CustomError> {
+pub async fn post_new_user_db(pool: &PgPool, new_user: User) -> Result<User, CustomError> {
     let user = sqlx::query_as!(
-      User, 
-      "INSERT INTO web_user 
+        User,
+        "INSERT INTO web_user 
       (username, member_id, user_password) VALUES ($1, $2, $3)
       RETURNING username, member_id, user_password",
-      new_user.username, new_user.member_id, new_user.user_password
+        new_user.username,
+        new_user.member_id,
+        new_user.user_password
     )
     .fetch_one(pool)
     .await

@@ -1,7 +1,7 @@
-use actix_web::{web, Error, HttpResponse};
 use crate::errors::CustomError;
+use actix_web::{web, Error, HttpResponse};
 
-// handlers to 'home' scope 
+// handlers to 'home' scope
 
 pub async fn index(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Error> {
     let ctx = tera::Context::new();
@@ -15,5 +15,4 @@ pub async fn hello(path: web::Path<String>) -> HttpResponse {
     let name = path.into_inner();
     let response = format!("Hello {}!", &name);
     HttpResponse::Ok().json(&response)
-
 }

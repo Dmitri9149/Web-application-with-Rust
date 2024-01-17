@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use actix_web::web;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MemberRegisterForm {
@@ -27,8 +27,8 @@ pub struct User {
 // Form to enable members to sign in
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MemberSigninForm {
-pub username: String,
-pub password: String,
+    pub username: String,
+    pub password: String,
 }
 
 // Struct to hold user-provided details to create a new plant
@@ -142,7 +142,7 @@ pub struct NewFact {
     pub ref_to_origin: String,
 }
 
-// Struct to hold the response from server after creation of a new interesting fact 
+// Struct to hold the response from server after creation of a new interesting fact
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NewFactResponse {
     pub fact_id: i32,
@@ -162,4 +162,3 @@ impl From<web::Json<NewFactResponse>> for NewFactResponse {
         }
     }
 }
-
