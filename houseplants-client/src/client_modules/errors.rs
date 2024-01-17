@@ -51,6 +51,6 @@ impl error::ResponseError for CustomError {
 
 impl fmt::Display for CustomError {
   fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
-      write!(f, "{}", self)
+      write!(f, "{}", self.error_response())
   }
 }
