@@ -15,7 +15,7 @@ pub async fn show_interesting_facts(tmpl: web::Data<tera::Tera>) -> Result<HttpR
         .unwrap()
         .body()
         .await?;
-    let facts_response: Vec<NewFactResponse> = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let facts_response: Vec<NewFactResponse> = serde_json::from_str(std::str::from_utf8(&res)?)?;
     let mut ctx = tera::Context::new();
     ctx.insert("facts", &facts_response);
     let s = tmpl

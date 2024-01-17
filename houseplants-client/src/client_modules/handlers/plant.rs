@@ -57,7 +57,7 @@ pub async fn new_plant_addition(
                 .await?;
             println!("Finished call from DB with new plant as result: {:?}", res);
             let plant_response: NewPlantResponse =
-                serde_json::from_str(&std::str::from_utf8(&res)?)?;
+                serde_json::from_str(std::str::from_utf8(&res)?)?;
             Ok(HttpResponse::Ok().json(plant_response))
         }
         // if we can not find user with the 'user_name' in DB
@@ -101,7 +101,7 @@ pub async fn handle_insert_plant(
         .body()
         .await?;
     println!("Finished call: {:?}", res);
-    let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let plant_response: NewPlantResponse = serde_json::from_str(std::str::from_utf8(&res)?)?;
     Ok(HttpResponse::Ok().json(plant_response))
 }
 
@@ -155,7 +155,7 @@ pub async fn handle_update_plant(
         .unwrap()
         .body()
         .await?;
-    let plant: UpdatePlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let plant: UpdatePlantResponse = serde_json::from_str(std::str::from_utf8(&res)?)?;
     Ok(HttpResponse::Ok().json(plant))
 }
 
@@ -181,7 +181,7 @@ pub async fn show_plant_for_member(
         .unwrap()
         .body()
         .await?;
-    let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let plant_response: NewPlantResponse = serde_json::from_str(std::str::from_utf8(&res)?)?;
     Ok(HttpResponse::Ok().json(plant_response))
 }
 
@@ -207,7 +207,7 @@ pub async fn show_plant_for_member_render_template(
         .unwrap()
         .body()
         .await?;
-    let plant_response: NewPlantResponse = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let plant_response: NewPlantResponse = serde_json::from_str(std::str::from_utf8(&res)?)?;
     let mut ctx = tera::Context::new();
     ctx.insert("current_name", &plant_response.plant_name);
     ctx.insert(
@@ -240,7 +240,7 @@ pub async fn show_plants(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, Er
         .unwrap()
         .body()
         .await?;
-    let plants_response: Vec<NewPlantResponse> = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let plants_response: Vec<NewPlantResponse> = serde_json::from_str(std::str::from_utf8(&res)?)?;
     let mut ctx = tera::Context::new();
     ctx.insert("plants", &plants_response);
     let s = tmpl

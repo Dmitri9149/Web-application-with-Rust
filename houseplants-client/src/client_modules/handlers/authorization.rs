@@ -77,7 +77,7 @@ pub async fn handle_register(
                         .body()
                         .await?;
                     let member_response: MemberResponse =
-                        serde_json::from_str(&std::str::from_utf8(&result)?)?;
+                        serde_json::from_str(std::str::from_utf8(&result)?)?;
                     s = format!(
                 "Congratulations. You have been successfully registered as member of HousePlants and your member id is: {}. To start using HousePlant, please login with your credentials.", 
                 member_response.member_id
@@ -123,7 +123,7 @@ pub async fn handle_signin(
         // user with the username exists in DB
         Ok(user) => {
             let does_password_match = argon2::verify_encoded(
-                &user.user_password.trim(),
+                user.user_password.trim(),
                 params.password.clone().as_bytes(),
             )
             .unwrap();

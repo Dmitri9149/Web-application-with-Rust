@@ -15,7 +15,7 @@ pub async fn show_members(tmpl: web::Data<tera::Tera>) -> Result<HttpResponse, E
         .unwrap()
         .body()
         .await?;
-    let members_response: Vec<MemberResponse> = serde_json::from_str(&std::str::from_utf8(&res)?)?;
+    let members_response: Vec<MemberResponse> = serde_json::from_str(std::str::from_utf8(&res)?)?;
     let mut ctx = tera::Context::new();
     ctx.insert("members", &members_response);
     let s = tmpl
