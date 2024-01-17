@@ -19,8 +19,7 @@ pub async fn get_plants_for_member_db(
 // get plant details for particular member and particular plant 
 pub async fn get_plant_details_db(pool: &PgPool, member_id: i32, plant_id: i32
 ) -> Plant {
-    // Prepare SQL statement
-    let plant = sqlx::query_as!(
+    sqlx::query_as!(
         Plant, 
         "SELECT * FROM plant WHERE member_id = $1 AND plant_id = $2",
         member_id, plant_id
@@ -28,9 +27,7 @@ pub async fn get_plant_details_db(pool: &PgPool, member_id: i32, plant_id: i32
         .fetch_optional(pool)
         .await
         .unwrap()
-        .unwrap();
-
-    plant
+        .unwrap()
 }
 
 // post new plant record by a member
@@ -38,7 +35,7 @@ pub async fn post_new_plant_db(
     pool: &PgPool,
     new_plant: NewPlant,
 ) -> Plant {
-    let plant_row= sqlx::query_as!(Plant,
+    sqlx::query_as!(Plant,
         "INSERT INTO plant (member_id, plant_name, 
             plant_description, plant_alternative_name, plant_extra_info, plant_care, 
             plant_care_difficulty, plant_price) 
@@ -51,8 +48,7 @@ pub async fn post_new_plant_db(
             new_plant.plant_care_difficulty, new_plant.plant_price)
             .fetch_one(pool)
             .await
-            .unwrap();
-    plant_row
+            .unwrap()
 }
 
 // delete plant record 
@@ -120,9 +116,8 @@ pub async fn update_plant_details_db (
         Some(price) => price, 
         None => current_plant.plant_description.unwrap_or_default() 
     };
-
-    // Prepare SQL statement 
-    let plant = sqlx::query_as!(
+    // make query
+    sqlx::query_as!(
         Plant,
         "UPDATE plant SET plant_name = $1, 
         plant_description = $2, plant_care = $3, 
@@ -138,8 +133,7 @@ pub async fn update_plant_details_db (
     )
         .fetch_one(pool)
         .await
-        .unwrap();
-    plant
+        .unwrap()
 }
 
 // get all plants records from DB   
